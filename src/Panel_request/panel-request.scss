@@ -1,0 +1,54 @@
+.cloud-sliding-panel-container .panel-side {
+    width: 35vw !important;
+    right: 0px;
+}
+
+.cloud-sliding-panel-container .panel-glass-side {
+    width: 65vw !important;
+    right: 35vw !important;
+    left: 0 !important;
+    
+}
+
+.sidePanelShow {
+    animation-duration: 0.3s !important;
+}
+
+.card-request-panel {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.message-area{
+    width: 80%;
+    margin-top: 20px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.textarea {
+    width: 100%;
+    display: block;
+    border: 1px solid #dee0e0;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    padding: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    height: 150px;
+}
+
+.button-help{
+    width: 70px;
+    float: right;
+}
+
+@media all and (max-width: 1024px) {
+    
+    .sliding_panel {
+      width: 70% !important;
+    }
+    
+  }

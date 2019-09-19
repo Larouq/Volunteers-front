@@ -1,0 +1,99 @@
+.App-header {
+    z-index: 2;
+    height: 100px;
+  }
+  
+  .name {
+    font-size: 2em;
+    color: white;
+    margin-left: 70px;
+  }
+  
+  nav {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar{
+      margin-right: 100px;
+  }
+  
+  .navlink {
+    margin-right: 6px;
+    background: rgba(155, 155, 155, 0.15);
+    border: 0 solid transparent;
+    border-radius: 64px;
+    padding: 12px 16px;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .navlink:hover {
+    color: #1DB954;
+  }
+  
+  .imageStyle {
+    background-color: #b0b1b2;
+    border-radius: 100%;
+  }
+  
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bm-burger-button {
+    left: initial;
+    right: 36px;
+    position: fixed;
+    width: 36px;
+    height: 30px;
+  }
+  
+  .bm-burger-bars {
+    background: white;
+  }
+  
+  .bm-menu {
+    height: 100%;
+    background: black;
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+  }
+  
+  .bm-cross {
+    background: white;
+  }
+  
+  .bm-item-list {
+    padding: 0.8em;
+    display: flex;
+    flex-direction: column;
+    height: 20% !important;
+  }
+  
+  .bm-item {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+
+  
+  
+  @media all and (max-width: 1024px) {
+    
+    .name {
+      font-size: 25px;
+    }
+    
+  }
+  

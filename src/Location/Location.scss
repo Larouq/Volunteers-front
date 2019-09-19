@@ -1,0 +1,32 @@
+.mapboxgl-popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.request-container {
+    height: 83vh;
+    overflow-y: scroll;
+}
+
+.requests {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    height: 25vh;
+}
+
+.map_request{
+    width: 50%;
+}
+
+@media all and (max-width: 1000px) {
+    
+    .request-container {
+        display: none;
+    }
+    
+    .map_request{
+        width: 100%;
+    }
+}

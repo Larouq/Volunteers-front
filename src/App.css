@@ -1,0 +1,13 @@
+body {
+  font-family: 'Nunito', sans-serif;
+  background: url(/img/bg-home.jpg) center center fixed;
+}
+
+.App {
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+a:hover{
+  text-decoration: none;
+}
