@@ -86,13 +86,27 @@
     display: inline-block;
   }
 
-
+  .open-login-button {
+    display: none;
+  }
   
   
   @media all and (max-width: 1024px) {
     
     .name {
       font-size: 25px;
+    }
+    
+  }
+
+  @media all and (max-width: 820px) {
+    
+    .open-login-button {
+      display: block;
+      margin-left: 30px;
+    }
+    .default_login{
+      display: none;
     }
     
   }

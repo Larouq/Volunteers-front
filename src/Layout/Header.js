@@ -7,6 +7,7 @@ import "./Layout.scss";
 import { withRouter } from "react-router";
 import ModalCreateRequest from "../Modal_createRequest/modalRequest";
 import ModalUserRequest from "../Modal_userRequest/modalUserRequest";
+import ModalLogin from "../Modal_login/modalLogin"
 
 class Header extends Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class Header extends Component {
       openModal: false,
       openModalUserRequest: false,
       openAlert: false,
-      displayBurger: true
+      displayBurger: true,
+      openModalLogin: false
     };
   }
 
@@ -70,6 +72,14 @@ class Header extends Component {
     }
   }
 
+  setUser = (value) => {
+    this.setState({user: value})
+  }
+
+  setOpenAlert = (value) => {
+    this.setState({openAlert: value})
+  }
+ 
   render() {
     const isMenuOpen = function(state) {
       return state.isOpen;
@@ -91,6 +101,7 @@ class Header extends Component {
                     <Col xs={5}>
                       <Form.Control
                         onChange={this.handleChangeEmail}
+                        className="default_login"
                         isValid={this.checkValidEmail(this.state.email)}
                         isInvalid={
                           this.state.email &&
@@ -103,6 +114,7 @@ class Header extends Component {
                     <Col xs={5}>
                       <Form.Control
                         onChange={this.handleChangePassword}
+                        className="default_login"
                         isValid={this.state.password.length > 5}
                         type="Password"
                         placeholder="Password"
@@ -111,6 +123,7 @@ class Header extends Component {
                     <Col xs={2}>
                       <Button
                         variant="success"
+                        className="default_login"
                         onClick={() => {
                           this.handleSubmit();
                         }}
@@ -121,6 +134,15 @@ class Header extends Component {
                         }
                       >
                         login
+                      </Button>
+                      <Button
+                        variant="success"
+                        className="open-login-button"
+                        onClick={() => {
+                         this.setState({openModalLogin: true})
+                        }}
+                      >
+                        Login
                       </Button>
                     </Col>
                   </Row>
@@ -164,6 +186,15 @@ class Header extends Component {
                 <Menu className="bm-menu-wrap" right onStateChange={isMenuOpen}>
                   <div
                     className="menu-item"
+                    onClick={() =>{
+                      this.setState({ openModalUserRequest: true })
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    my request
+                  </div>
+                  <div
+                    className="menu-item"
                     onClick={() => this.setState({ openModal: true })}
                     style={{ cursor: "pointer" }}
                   >
@@ -199,6 +230,20 @@ class Header extends Component {
                   onCloseModal={() => {
                     this.setState({ openModalUserRequest: false });
                   }}
+                />
+              }
+              {
+                <ModalLogin
+                  show={this.state.openModalLogin}
+                  onHide={() => {
+                    this.setState({ openModalLogin: false });
+                  }}
+                  onCloseModal={() => {
+                    this.setState({ openModalLogin: false });
+                  }}
+                  setUser={this.setUser}
+                  setOpenAlert={this.setOpenAlert}
+                  user={this.state.user}
                 />
               }
             </div>

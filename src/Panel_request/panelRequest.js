@@ -53,6 +53,7 @@ class PanelRequest extends Component {
           </Card>
           <MapRequest
             height={"40vh"}
+            className="map_request"
             requests={[this.props.request]}
             center={[lng, lat]}
             zoom={[14]}

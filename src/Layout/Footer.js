@@ -22,8 +22,7 @@ class Footer extends Component {
                     justifyContent: "space-between"
                   }}
                 >
-                  <p>Volunteers</p>
-                  <p>larouq - All right Reserved</p>
+                  <p>Volunteers larouq - All right Reserved</p>
                 </div>
               </div>
             </Card>

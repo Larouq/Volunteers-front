@@ -45,10 +45,16 @@
     float: right;
 }
 
-@media all and (max-width: 1024px) {
+@media all and (max-width: 812px) {
     
-    .sliding_panel {
+    .cloud-sliding-panel-container .panel-side {
       width: 70% !important;
     }
-    
+    .textarea {
+        height: 100px;
+    }
+
+    .map_request {
+        width: 100%;
+    }
   }
