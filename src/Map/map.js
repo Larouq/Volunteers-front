@@ -6,8 +6,6 @@ const Map = ReactMapboxGl({
   accessToken: config.MAPBOX_API
 });
 
-console.log(config)
-
 class MapRequest extends Component {
   constructor(props) {
     super(props);
