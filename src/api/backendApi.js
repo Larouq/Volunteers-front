@@ -1,7 +1,7 @@
 import axios from "axios";
+import config from "../config";
 
 const BACKEND_API_URL = "http://localhost:3000";
-const YANDEX_API = "2e846d9f-4492-4c1d-b01a-fcb4810766c7";
 
 export async function submitRegistration(form) {
   const { email, password, firstName, lastName } = form;
@@ -100,7 +100,7 @@ export async function submitRequest(access_token, client, uid, form) {
 export async function getAddress(city) {
   try {
     const result = await axios.get(
-      `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=${YANDEX_API}&geocode=${city}&lang=en-US`
+      `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=${config.YANDEX_API}&geocode=${city}&lang=en-US`
     );
     console.log("result", result);
     return result;

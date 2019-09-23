@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import ReactMapboxGl, { Popup } from "react-mapbox-gl";
+import config from "../config";
 
 const Map = ReactMapboxGl({
-  accessToken:
-    "pk.eyJ1IjoibGFyb3VxIiwiYSI6ImNqdWkydHVlNDBkajE0Mm43amViYTc5cmMifQ.wORRPu3OalU4jRYfUBJ01A"
+  accessToken: config.MAPBOX_API
 });
+
+console.log(config)
 
 class MapRequest extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
     this.mapRef = React.createRef();
   }
 
@@ -24,8 +25,8 @@ class MapRequest extends Component {
         }}
         center={this.props.center}
         zoom={this.props.zoom}
-        onMoveEnd={(map) => this.props.onMoveEnd(map.getCenter())}
-        onZoomEnd={(map) => this.props.onZoomEnd(map.getCenter())}
+        onMoveEnd={map => this.props.onMoveEnd(map.getCenter())}
+        onZoomEnd={map => this.props.onZoomEnd(map.getCenter())}
       >
         {this.props.requests &&
           this.props.requests.map(request => {
