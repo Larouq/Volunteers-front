@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../config";
 
-const BACKEND_API_URL = " https://stark-anchorage-44619.herokuapp.com";   
+const BACKEND_API_URL = "https://stark-anchorage-44619.herokuapp.com";   
 
 export async function submitRegistration(form) {
   const { email, password, firstName, lastName } = form;

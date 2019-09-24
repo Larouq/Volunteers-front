@@ -20,8 +20,14 @@ class Location extends Component {
   }
 
   async componentDidMount() {
+    this.getMyPosition();
     const { authentication_token, client, email } = localStorage;
-    const requests = await fetchRequests(authentication_token, client, email, null);
+    const requests = await fetchRequests(
+      authentication_token,
+      client,
+      email,
+      null
+    );
     this.setState({
       requests: requests.map(request => {
         const result = {
@@ -46,6 +52,14 @@ class Location extends Component {
       return 0;
     });
   };
+
+  getMyPosition = () => {
+    window.navigator.geolocation.getCurrentPosition(position => {
+      const newCenter = [position.coords.longitude, position.coords.latitude];
+      this.setState({ center: newCenter });
+    });
+  };
+
   render() {
     return (
       <Fragment>

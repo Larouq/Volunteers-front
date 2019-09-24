@@ -127,7 +127,7 @@ class ModalCreateRequest extends Component {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item
-                onClick={() => this.setState({ category: "home & garden" })}
+                onClick={() => this.setState({ category: "Home" })}
               >
                 Home
               </Dropdown.Item>
@@ -157,7 +157,8 @@ class ModalCreateRequest extends Component {
             disabled={
               !this.state.requestTitle ||
               !this.state.address ||
-              !this.state.description
+              !this.state.description ||
+              this.state.category === "Choose category"
             }
           >
             Submit
