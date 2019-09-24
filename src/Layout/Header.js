@@ -217,7 +217,9 @@ class Header extends Component {
                 <ModalCreateRequest
                   show={this.state.openModal}
                   onHide={() => this.setState({ openModal: false })}
-                  onCloseModal={() => this.setState({ openModal: false })}
+                  onCloseModal={() => {
+                    this.setState({ openModal: false })
+                  }}
                   userId={localStorage.user_id}
                 />
               }

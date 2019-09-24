@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../config";
 
-const BACKEND_API_URL = "https://stark-anchorage-44619.herokuapp.com";
+const BACKEND_API_URL = "http://localhost:3000";   
 
 export async function submitRegistration(form) {
   const { email, password, firstName, lastName } = form;
@@ -71,7 +71,7 @@ export async function fetchRequests(access_token, client, uid, userId) {
 }
 
 export async function submitRequest(access_token, client, uid, form) {
-  const { title, address, description, user_id } = form;
+  const { title, address, description, user_id, category } = form;
   const lng = form.geoObject.Point.pos.split(" ")[0];
   const lat = form.geoObject.Point.pos.split(" ")[1];
 
@@ -82,7 +82,8 @@ export async function submitRequest(access_token, client, uid, form) {
       address,
       lat,
       lng,
-      user_id
+      user_id,
+      category
     };
     const result = await axios.post(`${BACKEND_API_URL}/requests`, params, {
       headers: {

@@ -107,6 +107,7 @@ class Location extends Component {
                         title={request.title}
                         description={request.description}
                         address={request.address}
+                        category={request.category}
                         request={request}
                         handleOpenAlert={this.handleOpenAlert}
                       />

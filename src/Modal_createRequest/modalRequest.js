@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button, Form, Alert } from "react-bootstrap";
+import { Modal, Button, Form, Alert, Dropdown } from "react-bootstrap";
 import { getAddress, submitRequest } from "../api/backendApi";
 import debounce from "lodash.debounce";
 import { withRouter } from "react-router";
@@ -11,6 +11,7 @@ class ModalCreateRequest extends Component {
       requestTitle: "",
       address: "",
       description: "",
+      category: "Choose category",
       userId: this.props.userId,
       geoObject: {},
       openAlert: false
@@ -51,17 +52,19 @@ class ModalCreateRequest extends Component {
   };
 
   handleSubmitRequest = () => {
-    const { requestTitle, description, geoObject, address } = this.state;
+    const { requestTitle, description, geoObject, address, category } = this.state;
     const { authentication_token, client, email, user_id } = localStorage;
     const form = {
       title: requestTitle,
       description,
       geoObject,
       address,
-      user_id
+      user_id,
+      category
     };
 
     submitRequest(authentication_token, client, email, form);
+    this.setState({category: "Choose category"})
     window.location.reload();
   };
 
@@ -118,6 +121,31 @@ class ModalCreateRequest extends Component {
               />
             </Form.Group>
           </Form>
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              {this.state.category}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item
+                onClick={() => this.setState({ category: "home & garden" })}
+              >
+                Home
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => this.setState({ category: "DIY" })}>
+                DIY
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => this.setState({ category: "Mechanical" })}
+              >
+                Mechanical
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => this.setState({ category: "Other" })}
+              >
+                Other
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.props.onCloseModal}>

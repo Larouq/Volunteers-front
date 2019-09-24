@@ -4,7 +4,7 @@ import SlidingPanel from "react-sliding-panel";
 import "./panel-request.scss";
 import moment from "moment";
 import MapRequest from "../Map/map";
-import { sendEmail } from '../api/backendApi';
+import { sendEmail } from "../api/backendApi";
 
 class PanelRequest extends Component {
   constructor(props) {
@@ -19,9 +19,13 @@ class PanelRequest extends Component {
   };
 
   handleSubmit = () => {
-    sendEmail(localStorage.email, this.props.request.user_id, this.state.message)
-    this.props.handleOpenAlert(true)
-    this.props.setIsOpenPanel(false)
+    sendEmail(
+      localStorage.email,
+      this.props.request.user_id,
+      this.state.message
+    );
+    this.props.handleOpenAlert(true);
+    this.props.setIsOpenPanel(false);
   };
   render() {
     const {
@@ -31,18 +35,22 @@ class PanelRequest extends Component {
       description,
       lat,
       lng,
+      category
     } = this.props.request;
     return (
       <SlidingPanel
         type={this.props.type}
         isOpen={this.props.isOpen}
         closeFunc={this.props.onClose}
-        className={'sliding_panel'}
+        className={"sliding_panel"}
       >
         <div className={"card-request-panel"}>
           <Card style={{ marginBottom: "20px" }}>
             <Card.Body>
-              <Card.Title>{title}</Card.Title>
+              <div className={"title_request"}>
+                <Card.Title>{title}</Card.Title>
+                <div className={category}>{category}</div>
+              </div>
               <Card.Subtitle className="mb-2 text-muted">
                 Posted at: {moment(created_at).format("YYYY-MM-DD")}
                 <br />

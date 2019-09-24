@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
-import PanelRequest from "../Panel_request/panelRequest"
+import PanelRequest from "../Panel_request/panelRequest";
+import "./cardRequest.scss";
 
 class CardRequest extends Component {
   constructor(props) {
@@ -10,9 +11,9 @@ class CardRequest extends Component {
     };
   }
 
-  setIsOpenPanel = (value) => {
-    this.setState({openPanel: value})
-  }
+  setIsOpenPanel = value => {
+    this.setState({ openPanel: value });
+  };
   render() {
     return (
       <div>
@@ -25,10 +26,16 @@ class CardRequest extends Component {
                 style={{ width: "35%", height: "100%" }}
               />
               <Card.Body>
-                <Card.Title>{this.props.title}</Card.Title>
+                <div className={'title_request'}>
+                  <Card.Title>{this.props.title}</Card.Title>
+                  <div className={this.props.category}>
+                    {this.props.category}
+                  </div>
+                </div>
                 <Card.Subtitle className="mb-2 text-muted">
-                      {this.props.address}
-                  </Card.Subtitle>
+                  {this.props.address}
+                </Card.Subtitle>
+
                 <Card.Text>{this.props.description}</Card.Text>
                 <Button
                   onClick={() => this.setState({ openPanel: true })}
@@ -42,7 +49,7 @@ class CardRequest extends Component {
         </Row>
         {this.state.openPanel && (
           <PanelRequest
-            type={'side'}
+            type={"side"}
             isOpen={this.state.openPanel}
             onClose={() => this.setState({ openPanel: false })}
             request={this.props.request}
