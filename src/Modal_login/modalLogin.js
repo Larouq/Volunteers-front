@@ -35,6 +35,7 @@ class ModalLogin extends Component {
     this.props.setUser(user);
     if (this.props.user.status === 401) this.props.setOpenAlert(true);
     if (user) {
+      this.props.setModalLogin(false)
       this.props.history.push("/location");
     }
   }

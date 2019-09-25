@@ -24,14 +24,6 @@ class Header extends Component {
     };
   }
 
-  listenScrollEvent = e => {
-    if (window.scrollY > 50) {
-      this.setState({ color: "rgba(0, 0, 0, 0.6)" });
-    } else {
-      this.setState({ color: "black" });
-    }
-  };
-
   listenResizeEvent = e => {
     if (window.innerWidth < 1024) {
       this.setState({ displayBurger: false });
@@ -41,7 +33,6 @@ class Header extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener("scroll", this.listenScrollEvent);
     window.addEventListener("resize", this.listenResizeEvent);
   }
 
@@ -78,6 +69,10 @@ class Header extends Component {
 
   setOpenAlert = (value) => {
     this.setState({openAlert: value})
+  }
+
+  setModalLogin = (value) => {
+    this.setState({openModalLogin: value})
   }
  
   render() {
@@ -243,6 +238,7 @@ class Header extends Component {
                   onCloseModal={() => {
                     this.setState({ openModalLogin: false });
                   }}
+                  setModalLogin={this.setModalLogin}
                   setUser={this.setUser}
                   setOpenAlert={this.setOpenAlert}
                   user={this.state.user}
