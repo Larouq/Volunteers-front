@@ -2,3 +2,13 @@
     max-height: 650px;
     overflow-y: scroll;
 }
+
+@media all and (max-width: 830px) {
+    .text__request{
+        display: none;
+    }
+
+    .requests{
+        height: 19vh;
+    }
+}

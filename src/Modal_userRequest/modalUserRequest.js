@@ -74,7 +74,7 @@ class ModalUserRequest extends Component {
                             <Card.Subtitle className="mb-2 text-muted">
                               {request.address}
                             </Card.Subtitle>
-                            <Card.Text>{request.description}</Card.Text>
+                            <Card.Text className="text__request">{request.description}</Card.Text>
                             <Button
                               onClick={() =>
                                 this.handleSubmit(request.id, request.title)

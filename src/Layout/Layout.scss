@@ -100,11 +100,7 @@
     .form_header{
       display: none;
     }
-    
-  }
 
-  @media all and (max-width: 1024px) {
-    
     .open-login-button {
       display: block;
       margin-left: 30px;
@@ -120,10 +116,12 @@
     .burger__menuy{
       display: block;
     }
+    
+  }
 
+  @media all and (max-width: 1000px) {
     .footer_nav{
       display: none;
     }
-    
   }
   

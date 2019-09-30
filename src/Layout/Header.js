@@ -20,7 +20,8 @@ class Header extends Component {
       openModalUserRequest: false,
       openAlert: false,
       displayBurger: true,
-      openModalLogin: false
+      openModalLogin: false,
+      isOpenBurgerMenu: false
     };
   }
 
@@ -75,10 +76,15 @@ class Header extends Component {
     this.setState({ openModalLogin: value });
   };
 
+  closeMenu() {
+    this.setState({ isOpenBurgerMenu: false });
+  }
+
+  handleStateChange(state) {
+    this.setState({ isOpenBurgerMenu: state.isOpen });
+  }
+
   render() {
-    const isMenuOpen = function(state) {
-      return state.isOpen;
-    };
     return (
       <div>
         <header className="App-header" style={{ background: "black" }}>
@@ -181,11 +187,19 @@ class Header extends Component {
                   </div>
                 </div>
               ) : (
-                <Menu className="bm-menu-wrap" right onStateChange={isMenuOpen}>
+                <Menu
+                  className="bm-menu-wrap"
+                  right
+                  isOpen={this.state.isOpenBurgerMenu}
+                  onStateChange={state => this.handleStateChange(state)}
+                >
                   <div
                     className="menu-item"
                     onClick={() => {
-                      this.setState({ openModalUserRequest: true });
+                      this.setState({
+                        openModalUserRequest: true
+                      });
+                      this.closeMenu();
                     }}
                     style={{ cursor: "pointer" }}
                   >
@@ -193,7 +207,10 @@ class Header extends Component {
                   </div>
                   <div
                     className="menu-item"
-                    onClick={() => this.setState({ openModal: true })}
+                    onClick={() => {
+                      this.setState({ openModal: true });
+                      this.closeMenu();
+                    }}
                     style={{ cursor: "pointer" }}
                   >
                     create request
@@ -202,6 +219,7 @@ class Header extends Component {
                     className="menu-item"
                     style={{ marginLeft: "20px", cursor: "pointer" }}
                     onClick={async () => {
+                      this.closeMenu();
                       await localStorage.clear();
                       this.setState({ email: "", password: "" });
                       this.props.history.push("/");

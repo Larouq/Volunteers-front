@@ -21,7 +21,7 @@ class Location extends Component {
   }
 
   async componentDidMount() {
-    this.getMyPosition();
+    // this.getMyPosition();
     const { authentication_token, client, email } = localStorage;
     const requests = await fetchRequests(
       authentication_token,
@@ -72,7 +72,7 @@ class Location extends Component {
             <MapRequest
               className="map_location"
               width={"100%"}
-              height={window.innerWidth < 1030 ? "100vh" : "83vh"}
+              height={window.innerWidth < 820 ? "88vh" : "83vh"}
               requests={this.state.requests}
               center={this.state.center}
               onMoveEnd={center => {
