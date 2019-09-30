@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../config";
 
-const BACKEND_API_URL = "http://localhost:3000";   
+const BACKEND_API_URL = "https://polar-bastion-47357.herokuapp.com";   
 
 export async function submitRegistration(form) {
   const { email, password, firstName, lastName } = form;
