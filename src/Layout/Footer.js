@@ -4,7 +4,7 @@ import { Card, Container, Row, Col } from "react-bootstrap";
 class Footer extends Component {
   render() {
     return (
-      <Container style={{ marginTop: "10px" }}>
+      <Container className="footer_nav" style={{ marginTop: "10px" }}>
         <Row>
           <Col xs={12}>
             <Card style={{ backgroundColor: "black", color: "white" }}>

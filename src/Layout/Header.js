@@ -7,7 +7,7 @@ import "./Layout.scss";
 import { withRouter } from "react-router";
 import ModalCreateRequest from "../Modal_createRequest/modalRequest";
 import ModalUserRequest from "../Modal_userRequest/modalUserRequest";
-import ModalLogin from "../Modal_login/modalLogin"
+import ModalLogin from "../Modal_login/modalLogin";
 
 class Header extends Component {
   constructor(props) {
@@ -24,8 +24,8 @@ class Header extends Component {
     };
   }
 
-  listenResizeEvent = e => {
-    if (window.innerWidth < 1024) {
+  listenResizeEvent = () => {
+    if (window.innerWidth < 1030) {
       this.setState({ displayBurger: false });
     } else {
       this.setState({ displayBurger: true });
@@ -63,18 +63,18 @@ class Header extends Component {
     }
   }
 
-  setUser = (value) => {
-    this.setState({user: value})
-  }
+  setUser = value => {
+    this.setState({ user: value });
+  };
 
-  setOpenAlert = (value) => {
-    this.setState({openAlert: value})
-  }
+  setOpenAlert = value => {
+    this.setState({ openAlert: value });
+  };
 
-  setModalLogin = (value) => {
-    this.setState({openModalLogin: value})
-  }
- 
+  setModalLogin = value => {
+    this.setState({ openModalLogin: value });
+  };
+
   render() {
     const isMenuOpen = function(state) {
       return state.isOpen;
@@ -91,64 +91,67 @@ class Header extends Component {
             </Link>
             <div className="navbar">
               {!localStorage.authentication_token ? (
-                <Form>
-                  <Row>
-                    <Col xs={5}>
-                      <Form.Control
-                        onChange={this.handleChangeEmail}
-                        className="default_login"
-                        isValid={this.checkValidEmail(this.state.email)}
-                        isInvalid={
-                          this.state.email &&
-                          !this.checkValidEmail(this.state.email)
-                        }
-                        type="text"
-                        placeholder="Email"
-                      />
-                    </Col>
-                    <Col xs={5}>
-                      <Form.Control
-                        onChange={this.handleChangePassword}
-                        className="default_login"
-                        isValid={this.state.password.length > 5}
-                        type="Password"
-                        placeholder="Password"
-                      />
-                    </Col>
-                    <Col xs={2}>
-                      <Button
-                        variant="success"
-                        className="default_login"
-                        onClick={() => {
-                          this.handleSubmit();
-                        }}
-                        disabled={
-                          !this.state.email ||
-                          !this.state.password ||
-                          !this.checkValidEmail(this.state.email)
-                        }
-                      >
-                        login
-                      </Button>
-                      <Button
-                        variant="success"
-                        className="open-login-button"
-                        onClick={() => {
-                         this.setState({openModalLogin: true})
-                        }}
-                      >
-                        Login
-                      </Button>
-                    </Col>
-                  </Row>
-                </Form>
-              ) : this.state.displayBurger ? (
+                <div>
+                  <Form className="form_header">
+                    <Row>
+                      <Col xs={5}>
+                        <Form.Control
+                          onChange={this.handleChangeEmail}
+                          className="default_login"
+                          isValid={this.checkValidEmail(this.state.email)}
+                          isInvalid={
+                            this.state.email &&
+                            !this.checkValidEmail(this.state.email)
+                          }
+                          type="text"
+                          placeholder="Email"
+                        />
+                      </Col>
+                      <Col xs={5}>
+                        <Form.Control
+                          onChange={this.handleChangePassword}
+                          className="default_login"
+                          isValid={this.state.password.length > 5}
+                          type="Password"
+                          placeholder="Password"
+                        />
+                      </Col>
+                      <Col xs={2}>
+                        <Button
+                          variant="success"
+                          className="default_login"
+                          onClick={() => {
+                            this.handleSubmit();
+                          }}
+                          disabled={
+                            !this.state.email ||
+                            !this.state.password ||
+                            !this.checkValidEmail(this.state.email)
+                          }
+                        >
+                          login
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Form>
+                  <Button
+                    variant="success"
+                    className="open-login-button"
+                    onClick={() => {
+                      this.setState({ openModalLogin: true });
+                    }}
+                  >
+                    Login
+                  </Button>
+                </div>
+              ) : window.innerWidth > 1030 ? (
                 <div
                   style={{
                     display: "flex",
                     flexDirection: "row",
                     alignItems: "center"
                   }}
+                  className="burger__menu"
                 >
                   <div
                     className="navlink"
@@ -181,8 +184,8 @@ class Header extends Component {
                 <Menu className="bm-menu-wrap" right onStateChange={isMenuOpen}>
                   <div
                     className="menu-item"
-                    onClick={() =>{
-                      this.setState({ openModalUserRequest: true })
+                    onClick={() => {
+                      this.setState({ openModalUserRequest: true });
                     }}
                     style={{ cursor: "pointer" }}
                   >
@@ -213,7 +216,7 @@ class Header extends Component {
                   show={this.state.openModal}
                   onHide={() => this.setState({ openModal: false })}
                   onCloseModal={() => {
-                    this.setState({ openModal: false })
+                    this.setState({ openModal: false });
                   }}
                   userId={localStorage.user_id}
                 />

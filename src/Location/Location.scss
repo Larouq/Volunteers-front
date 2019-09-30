@@ -20,6 +20,10 @@
     width: 50%;
 }
 
+.map_location {
+    height: 83vh;
+}
+
 @media all and (max-width: 1000px) {
     
     .request-container {
@@ -28,5 +32,9 @@
     
     .map_request{
         width: 100%;
+    }
+
+    .map_location {
+        height: 100vh;
     }
 }

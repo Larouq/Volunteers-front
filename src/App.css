@@ -1,6 +1,7 @@
 body {
   font-family: 'Nunito', sans-serif;
-  background: url(/img/bg-home.jpg) center center fixed;
+  background: url(/img/bg-home.jpg) center fixed;
+  background-size: cover;
 }
 
 .App {

@@ -15,12 +15,13 @@ class Location extends Component {
       requestId: null,
       openAlert: false,
       center: [-74.0060152, 40.7127281],
-      zoom: [12]
+      zoom: [12],
+      isMobileSize: false
     };
   }
 
   async componentDidMount() {
-    this.getMyPosition();
+    // this.getMyPosition();
     const { authentication_token, client, email } = localStorage;
     const requests = await fetchRequests(
       authentication_token,
@@ -69,8 +70,9 @@ class Location extends Component {
         >
           <div className={"map_request"}>
             <MapRequest
+              className="map_location"
               width={"100%"}
-              height={"83vh"}
+              height={window.innerWidth < 1030 ? "100vh" : "83vh"}
               requests={this.state.requests}
               center={this.state.center}
               onMoveEnd={center => {
