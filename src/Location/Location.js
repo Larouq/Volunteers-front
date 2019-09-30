@@ -21,7 +21,7 @@ class Location extends Component {
   }
 
   async componentDidMount() {
-    // this.getMyPosition();
+    this.getMyPosition();
     const { authentication_token, client, email } = localStorage;
     const requests = await fetchRequests(
       authentication_token,
