@@ -19,6 +19,7 @@ export async function submitRegistration(form) {
       results.headers["access-token"]
     );
     localStorage.setItem("email", email);
+    localStorage.setItem("name", firstName);
     localStorage.setItem("user_id", results.data.data["id"]);
     localStorage.setItem("client", results.headers["client"]);
     return results;
@@ -72,7 +73,7 @@ export async function fetchRequests(access_token, client, uid, userId) {
 }
 
 export async function submitRequest(access_token, client, uid, form) {
-  const { title, address, description, user_id, category } = form;
+  const { title, address, description, user_id, category, name } = form;
   const lng = form.geoObject.Point.pos.split(" ")[0];
   const lat = form.geoObject.Point.pos.split(" ")[1];
 
@@ -84,7 +85,8 @@ export async function submitRequest(access_token, client, uid, form) {
       lat,
       lng,
       user_id,
-      category
+      category,
+      user_name: name
     };
     const result = await axios.post(`${BACKEND_API_URL}/requests`, params, {
       headers: {
@@ -104,7 +106,6 @@ export async function getAddress(city) {
     const result = await axios.get(
       `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=${config.YANDEX_API}&geocode=${city}&lang=en-US`
     );
-    console.log(result)
     return result;
   } catch (error) {
     return error.response;

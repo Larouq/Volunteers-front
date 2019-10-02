@@ -35,7 +35,8 @@ class PanelRequest extends Component {
       description,
       lat,
       lng,
-      category
+      category,
+      user_name
     } = this.props.request;
     return (
       <SlidingPanel
@@ -52,7 +53,7 @@ class PanelRequest extends Component {
                 <div className={`${category}__card`}>{category}</div>
               </div>
               <Card.Subtitle className="mb-2 text-muted">
-                Posted at: {moment(created_at).format("YYYY-MM-DD")}
+                Posted by {user_name} at: {moment(created_at).format("YYYY-MM-DD")}
                 <br />
                 {address}
               </Card.Subtitle>

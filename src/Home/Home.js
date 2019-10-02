@@ -110,10 +110,10 @@ class Home extends Component {
                         <Form.Control
                           onChange={this.handleChangeFirstName}
                           style={{ height: "50px" }}
-                          isValid={this.state.firstName.length > 5}
+                          isValid={this.state.firstName.length > 4}
                           isInvalid={
                             this.state.firstName &&
-                            this.state.firstName.length < 5
+                            this.state.firstName.length < 4
                           }
                           type="text"
                           placeholder="First name"
@@ -124,10 +124,10 @@ class Home extends Component {
                         <Form.Control
                           onChange={this.handleChangeLastName}
                           style={{ height: "50px" }}
-                          isValid={this.state.lastName.length > 5}
+                          isValid={this.state.lastName.length > 4}
                           isInvalid={
                             this.state.lastName &&
-                            this.state.lastName.length < 5
+                            this.state.lastName.length < 4
                           }
                           type="text"
                           placeholder="Last name"

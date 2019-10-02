@@ -53,14 +53,15 @@ class ModalCreateRequest extends Component {
 
   handleSubmitRequest = () => {
     const { requestTitle, description, geoObject, address, category } = this.state;
-    const { authentication_token, client, email, user_id } = localStorage;
+    const { authentication_token, client, email, user_id, name } = localStorage;
     const form = {
       title: requestTitle,
       description,
       geoObject,
       address,
       user_id,
-      category
+      category,
+      name
     };
 
     submitRequest(authentication_token, client, email, form);
