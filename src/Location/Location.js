@@ -14,7 +14,7 @@ class Location extends Component {
       requests: [],
       requestId: null,
       openAlert: false,
-      center: [2.3613806, 48.8687483],
+      center: [-0.580036, 44.841225],
       zoom: [12],
       isMobileSize: false
     };

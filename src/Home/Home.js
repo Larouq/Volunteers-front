@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Card, Container, Row, Col, Form, Button } from "react-bootstrap";
+import {
+  Card,
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Alert
+} from "react-bootstrap";
 import "./Home.scss";
 import "bootstrap/dist/css/bootstrap.css";
 import { submitRegistration } from "../api/backendApi.js";
@@ -17,7 +25,8 @@ class Home extends Component {
       password: "",
       image: "",
       isSubmit: false,
-      isValidEmail: false
+      isValidEmail: false,
+      alertImage: false
     };
   }
   handleChangeFirstName = elem => {
@@ -47,13 +56,13 @@ class Home extends Component {
   };
 
   handleChangeStatus = ({ meta }, status) => {
-    console.log('status', status, meta);
+    console.log("status", status, meta);
   };
 
   handleSubmitFile = (files, allFiles) => {
     files.map(f => {
-      console.log(f)
-      return this.setState({image: f.meta.previewUrl})
+      console.log(f);
+      return this.setState({ image: f.meta.previewUrl, alertImage: true });
     });
     allFiles.forEach(f => f.remove());
   };
@@ -69,6 +78,19 @@ class Home extends Component {
   render() {
     return (
       <Container className={"home-container"} style={{ marginTop: "30px" }}>
+        {this.state.alertImage && (
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Alert
+              variant="success"
+              onClose={() => this.setState({ alertImage: false })}
+              dismissible
+              style={{ width: "400px" }}
+            >
+              <Alert.Heading>Import success</Alert.Heading>
+              <p>Your ID was correctly submit</p>
+            </Alert>
+          </div>
+        )}
         <div
           style={{
             textAlign: "center",
@@ -175,7 +197,7 @@ class Home extends Component {
                     accept="image/*,.pdf"
                   />
                   <Button
-                    style={{marginTop: "10px"}}
+                    style={{ marginTop: "10px" }}
                     variant="success"
                     onClick={() => this.handleSubmit()}
                     disabled={

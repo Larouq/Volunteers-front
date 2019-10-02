@@ -11,7 +11,7 @@ export async function submitRegistration(form) {
       password,
       name: lastName,
       nickname: firstName,
-      image: image
+      image
     };
     const results = await axios.post(`${BACKEND_API_URL}/auth`, params);
     localStorage.setItem(
