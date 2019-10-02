@@ -49,7 +49,7 @@ class PanelRequest extends Component {
             <Card.Body>
               <div className={"title_request"}>
                 <Card.Title>{title}</Card.Title>
-                <div className={category}>{category}</div>
+                <div className={`${category}__card`}>{category}</div>
               </div>
               <Card.Subtitle className="mb-2 text-muted">
                 Posted at: {moment(created_at).format("YYYY-MM-DD")}

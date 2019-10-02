@@ -4,6 +4,8 @@ import "./Home.scss";
 import "bootstrap/dist/css/bootstrap.css";
 import { submitRegistration } from "../api/backendApi.js";
 import { withRouter } from "react-router";
+import Dropzone from "react-dropzone-uploader";
+import "react-dropzone-uploader/dist/styles.css";
 
 class Home extends Component {
   constructor(props) {
@@ -13,6 +15,7 @@ class Home extends Component {
       lastName: "",
       email: "",
       password: "",
+      image: "",
       isSubmit: false,
       isValidEmail: false
     };
@@ -43,13 +46,29 @@ class Home extends Component {
     return false;
   };
 
+  handleChangeStatus = ({ meta }, status) => {
+    console.log('status', status, meta);
+  };
+
+  handleSubmitFile = (files, allFiles) => {
+    files.map(f => {
+      console.log(f)
+      return this.setState({image: f.meta.previewUrl})
+    });
+    allFiles.forEach(f => f.remove());
+  };
+
+  getUploadParams = () => {
+    return { url: "https://httpbin.org/post" };
+  };
+
   handleSubmit = async () => {
-    await submitRegistration({...this.state})
+    await submitRegistration({ ...this.state });
     this.props.history.push("/location");
   };
   render() {
     return (
-      <Container className={'home-container'} style={{ marginTop: "30px" }}>
+      <Container className={"home-container"} style={{ marginTop: "30px" }}>
         <div
           style={{
             textAlign: "center",
@@ -57,7 +76,7 @@ class Home extends Component {
             color: "white"
           }}
         >
-          <h1>Become the hero of your neighborhood</h1>
+          <h1 className="app_title">Become the hero of your neighborhood</h1>
         </div>
         <Row>
           <Col xs={12}>
@@ -147,7 +166,16 @@ class Home extends Component {
                       />
                     </Form.Group>
                   </Form>
+                  <Dropzone
+                    getUploadParams={this.getUploadParams}
+                    maxFiles={1}
+                    handleChangeStatus={this.handleChangeStatus}
+                    onSubmit={this.handleSubmitFile}
+                    inputContent="Drop your ID"
+                    accept="image/*,.pdf"
+                  />
                   <Button
+                    style={{marginTop: "10px"}}
                     variant="success"
                     onClick={() => this.handleSubmit()}
                     disabled={

@@ -118,6 +118,8 @@ class ModalCreateRequest extends Component {
                 as="textarea"
                 rows="4"
                 onChange={this.handleChangeDescription}
+                maxLength={300}
+                isInvalid={this.state.description.length === 300}
               />
             </Form.Group>
           </Form>

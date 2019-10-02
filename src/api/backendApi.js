@@ -4,13 +4,14 @@ import config from "../config";
 const BACKEND_API_URL = "http://localhost:3000";   
 
 export async function submitRegistration(form) {
-  const { email, password, firstName, lastName } = form;
+  const { email, password, firstName, lastName, image } = form;
   try {
     const params = {
       email,
       password,
       name: lastName,
-      nickname: firstName
+      nickname: firstName,
+      image: image
     };
     const results = await axios.post(`${BACKEND_API_URL}/auth`, params);
     localStorage.setItem(
