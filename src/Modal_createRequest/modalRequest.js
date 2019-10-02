@@ -127,22 +127,12 @@ class ModalCreateRequest extends Component {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item
-                onClick={() => this.setState({ category: "Home" })}
+                onClick={() => this.setState({ category: "One-time-task" })}
               >
-                Home
+                One-time task
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => this.setState({ category: "DIY" })}>
-                DIY
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => this.setState({ category: "Mechanical" })}
-              >
-                Mechanical
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => this.setState({ category: "Other" })}
-              >
-                Other
+              <Dropdown.Item onClick={() => this.setState({ category: "Material" })}>
+                Material
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

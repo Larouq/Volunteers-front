@@ -103,6 +103,7 @@ export async function getAddress(city) {
     const result = await axios.get(
       `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=${config.YANDEX_API}&geocode=${city}&lang=en-US`
     );
+    console.log(result)
     return result;
   } catch (error) {
     return error.response;

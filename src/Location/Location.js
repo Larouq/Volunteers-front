@@ -14,14 +14,14 @@ class Location extends Component {
       requests: [],
       requestId: null,
       openAlert: false,
-      center: [-74.0060152, 40.7127281],
+      center: [2.3613806, 48.8687483],
       zoom: [12],
       isMobileSize: false
     };
   }
 
   async componentDidMount() {
-    // this.getMyPosition();
+    this.getMyPosition();
     const { authentication_token, client, email } = localStorage;
     const requests = await fetchRequests(
       authentication_token,

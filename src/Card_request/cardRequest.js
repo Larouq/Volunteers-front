@@ -28,7 +28,7 @@ class CardRequest extends Component {
               <Card.Body>
                 <div className={'title_request'}>
                   <Card.Title>{this.props.title}</Card.Title>
-                  <div className={this.props.category}>
+                  <div className={`${this.props.category}__card`}>
                     {this.props.category}
                   </div>
                 </div>

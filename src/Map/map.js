@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactMapboxGl, { Popup } from "react-mapbox-gl";
 import config from "../config";
+import "./Map.scss";
 
 const Map = ReactMapboxGl({
   accessToken: config.MAPBOX_API
@@ -40,11 +41,18 @@ class MapRequest extends Component {
                 style={this.props.styleCursor}
                 onClick={() => this.props.onClickPopup(request.id)}
               >
-                <p>{request.title}</p>
-                <img
-                  src={"https://source.unsplash.com/user/erondu"}
-                  style={{ borderRadius: "50%", width: "70px", height: "70px" }}
-                />
+                <div className={`${request.category}__popup`}>
+                  <p style={{fontWeight: "bold"}}>{request.title}</p>
+                  <img
+                    src={"https://source.unsplash.com/user/erondu"}
+                    style={{
+                      borderRadius: "50%",
+                      width: "70px",
+                      height: "70px",
+                      marginBottom: "3px"
+                    }}
+                  />
+                </div>
               </Popup>
             );
           })}
