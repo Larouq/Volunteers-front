@@ -43,6 +43,7 @@ export async function submitAuthentification(form) {
     localStorage.setItem("email", email);
     localStorage.setItem("user_id", results.data.data["id"]);
     localStorage.setItem("client", results.headers["client"]);
+    localStorage.setItem("name", results.data.data["nickname"]);
     return results;
   } catch (error) {
     return error.response;
