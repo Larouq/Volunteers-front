@@ -87,7 +87,10 @@ class Home extends Component {
               style={{ width: "400px" }}
             >
               <Alert.Heading>Import success</Alert.Heading>
-              <p>Your ID was correctly submit</p>
+              <p>
+                Your ID was correctly send. Please click on submit to complete
+                your registration.
+              </p>
             </Alert>
           </div>
         )}
