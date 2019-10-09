@@ -72,6 +72,9 @@ class ModalUserRequest extends Component {
                           <Card.Body>
                             <Card.Title>{request.title}</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">
+                              Status: {request.status}
+                            </Card.Subtitle>
+                            <Card.Subtitle className="mb-2 text-muted">
                               {request.address}
                             </Card.Subtitle>
                             <Card.Text className="text__request">{request.description}</Card.Text>

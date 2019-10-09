@@ -14,7 +14,7 @@ class Location extends Component {
       requests: [],
       requestId: null,
       openAlert: false,
-      center: [-0.5847320000000309, 44.8067],
+      center: [-0.5800, 44.841225],
       zoom: [12],
       isMobileSize: false
     };
@@ -73,7 +73,9 @@ class Location extends Component {
               className="map_location"
               width={"100%"}
               height={window.innerWidth < 820 ? "88vh" : "83vh"}
-              requests={this.state.requests}
+              requests={this.state.requests.filter(
+                request => request.status === "unfulfilled"
+              )}
               center={this.state.center}
               onMoveEnd={center => {
                 const mapCenter = [center.lng, center.lat];
@@ -114,22 +116,24 @@ class Location extends Component {
                 </div>
               )}
               {this.state.requests &&
-                this.state.requests.map(request => {
-                  return (
-                    <div
-                      key={(Math.floor(Math.random() * 10000) + 1).toString()}
-                    >
-                      <CardRequest
-                        title={request.title}
-                        description={request.description}
-                        address={request.address}
-                        category={request.category}
-                        request={request}
-                        handleOpenAlert={this.handleOpenAlert}
-                      />
-                    </div>
-                  );
-                })}
+                this.state.requests
+                  .filter(request => request.status === "unfulfilled")
+                  .map(request => {
+                    return (
+                      <div
+                        key={(Math.floor(Math.random() * 10000) + 1).toString()}
+                      >
+                        <CardRequest
+                          title={request.title}
+                          description={request.description}
+                          address={request.address}
+                          category={request.category}
+                          request={request}
+                          handleOpenAlert={this.handleOpenAlert}
+                        />
+                      </div>
+                    );
+                  })}
             </Container>
           </div>
           {this.state.requestId !== null && (
