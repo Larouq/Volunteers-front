@@ -19,6 +19,8 @@ class PanelRequest extends Component {
   };
 
   handleSubmit = () => {
+    if (localStorage.user_id === this.props.request.user_id.toString())
+      return alert(new Error("can not send message to same user"));
     sendEmail(
       localStorage.email,
       this.props.request.user_id,
@@ -54,7 +56,8 @@ class PanelRequest extends Component {
                 <div className={`${category}__card`}>{category}</div>
               </div>
               <Card.Subtitle className="mb-2 text-muted">
-                Posted by {user_name} at: {moment(created_at).format("YYYY-MM-DD")}
+                Posted by {user_name} at:{" "}
+                {moment(created_at).format("YYYY-MM-DD")}
                 <br />
                 {address}
               </Card.Subtitle>

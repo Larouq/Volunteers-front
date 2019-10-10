@@ -127,10 +127,13 @@ export async function createMessage(requestID, userId, content) {
     const params = {
       user_id: userId,
       content
-    }
-    return axios.post(`${BACKEND_API_URL}/requests/${requestID}/messages`, params)
+    };
+    return axios.post(
+      `${BACKEND_API_URL}/requests/${requestID}/messages`,
+      params
+    );
   } catch (error) {
-    return error.response
+    return error.response;
   }
 }
 
