@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../config";
 
-const BACKEND_API_URL = "http://localhost:3000";   
+const BACKEND_API_URL = "http://localhost:3000";
 
 export async function submitRegistration(form) {
   const { email, password, firstName, lastName, image } = form;
@@ -123,10 +123,16 @@ export async function sendEmail(from, to, message) {
 }
 
 export async function deleteRequest(requestId) {
+  console.log(requestId)
   try {
-    const result = await axios.delete(
-      `${BACKEND_API_URL}/requests/${requestId}`
+    const params = {
+      statement: 1
+    };
+    const result = await axios.put(
+      `${BACKEND_API_URL}/requests/${requestId}`,
+      params
     );
+    console.log(result)
     return result;
   } catch (error) {
     return error.response;

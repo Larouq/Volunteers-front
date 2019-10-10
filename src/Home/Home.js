@@ -196,6 +196,8 @@ class Home extends Component {
                     maxFiles={1}
                     handleChangeStatus={this.handleChangeStatus}
                     onSubmit={this.handleSubmitFile}
+                    canCancel={true}
+                    submitButtonContent={'Upload ID'}
                     inputContent="Drop your ID"
                     accept="image/*,.pdf"
                   />

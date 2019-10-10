@@ -14,7 +14,7 @@ class Location extends Component {
       requests: [],
       requestId: null,
       openAlert: false,
-      center: [-0.5800, 44.841225],
+      center: [2.3514616, 48.8566969],
       zoom: [12],
       isMobileSize: false
     };
@@ -74,7 +74,9 @@ class Location extends Component {
               width={"100%"}
               height={window.innerWidth < 820 ? "88vh" : "83vh"}
               requests={this.state.requests.filter(
-                request => request.status === "unfulfilled"
+                request =>
+                  request.status === "unfulfilled" &&
+                  request.statement === "working"
               )}
               center={this.state.center}
               onMoveEnd={center => {
@@ -117,7 +119,11 @@ class Location extends Component {
               )}
               {this.state.requests &&
                 this.state.requests
-                  .filter(request => request.status === "unfulfilled")
+                  .filter(
+                    request =>
+                      request.status === "unfulfilled" &&
+                      request.statement === "working"
+                  )
                   .map(request => {
                     return (
                       <div

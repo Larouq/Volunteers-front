@@ -58,41 +58,47 @@ class ModalUserRequest extends Component {
         )}
         <Modal.Body className={"user_request"}>
           {this.state.requests && this.state.requests.length
-            ? this.state.requests.map(request => {
-                return (
-                  <div key={(Math.floor(Math.random() * 10000) + 1).toString()}>
-                    <Row>
-                      <Col xs={12}>
-                        <Card className={"requests"}>
-                          <Card.Img
-                            variant="top"
-                            src={`https://source.unsplash.com/user/erondu`}
-                            style={{ width: "35%", height: "100%" }}
-                          />
-                          <Card.Body>
-                            <Card.Title>{request.title}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">
-                              Status: {request.status}
-                            </Card.Subtitle>
-                            <Card.Subtitle className="mb-2 text-muted">
-                              {request.address}
-                            </Card.Subtitle>
-                            <Card.Text className="text__request">{request.description}</Card.Text>
-                            <Button
-                              onClick={() =>
-                                this.handleSubmit(request.id, request.title)
-                              }
-                              variant="primary"
-                            >
-                              Done
-                            </Button>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    </Row>
-                  </div>
-                );
-              })
+            ? this.state.requests
+                .filter(request => request.statement === "working")
+                .map(request => {
+                  return (
+                    <div
+                      key={(Math.floor(Math.random() * 10000) + 1).toString()}
+                    >
+                      <Row>
+                        <Col xs={12}>
+                          <Card className={"requests"}>
+                            <Card.Img
+                              variant="top"
+                              src={`https://source.unsplash.com/user/erondu`}
+                              style={{ width: "35%", height: "100%" }}
+                            />
+                            <Card.Body>
+                              <Card.Title>{request.title}</Card.Title>
+                              <Card.Subtitle className="mb-2 text-muted">
+                                Status: {request.status}
+                              </Card.Subtitle>
+                              <Card.Subtitle className="mb-2 text-muted">
+                                {request.address}
+                              </Card.Subtitle>
+                              <Card.Text className="text__request">
+                                {request.description}
+                              </Card.Text>
+                              <Button
+                                onClick={() =>
+                                  this.handleSubmit(request.id, request.title)
+                                }
+                                variant="primary"
+                              >
+                                Done
+                              </Button>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </div>
+                  );
+                })
             : "you don't have request"}
         </Modal.Body>
         <Modal.Footer variant="secondary">
