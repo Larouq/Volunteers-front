@@ -122,8 +122,19 @@ export async function sendEmail(from, to, message) {
   return axios.post(`${BACKEND_API_URL}/sendemail`, params);
 }
 
+export async function createMessage(requestID, userId, content) {
+  try {
+    const params = {
+      user_id: userId,
+      content
+    }
+    return axios.post(`${BACKEND_API_URL}/requests/${requestID}/messages`, params)
+  } catch (error) {
+    return error.response
+  }
+}
+
 export async function deleteRequest(requestId) {
-  console.log(requestId)
   try {
     const params = {
       statement: 1
@@ -132,7 +143,21 @@ export async function deleteRequest(requestId) {
       `${BACKEND_API_URL}/requests/${requestId}`,
       params
     );
-    console.log(result)
+    return result;
+  } catch (error) {
+    return error.response;
+  }
+}
+
+export async function republishRequest(requestId) {
+  try {
+    const params = {
+      status: 0
+    };
+    const result = await axios.put(
+      `${BACKEND_API_URL}/requests/${requestId}`,
+      params
+    );
     return result;
   } catch (error) {
     return error.response;
@@ -146,5 +171,7 @@ export default {
   submitRequest,
   getAddress,
   sendEmail,
-  deleteRequest
+  createMessage,
+  deleteRequest,
+  republishRequest
 };

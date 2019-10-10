@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Modal, Button, Card, Row, Col, Alert } from "react-bootstrap";
 import { withRouter } from "react-router";
-import { fetchRequests, deleteRequest } from "../api/backendApi";
+import {
+  fetchRequests,
+  deleteRequest,
+  republishRequest
+} from "../api/backendApi";
 import "./modelUserRequest.scss";
 
 class ModalUserRequest extends Component {
@@ -10,6 +14,7 @@ class ModalUserRequest extends Component {
     this.state = {
       requests: [],
       openAlertDeleteRequest: false,
+      openAlertRepublish: false,
       requestTitle: ""
     };
   }
@@ -28,6 +33,11 @@ class ModalUserRequest extends Component {
   handleSubmit = (requestId, requestTitle) => {
     deleteRequest(requestId);
     this.setState({ requestTitle, openAlertDeleteRequest: true });
+  };
+
+  handleRepublish = (requestId, requestTitle) => {
+    republishRequest(requestId);
+    this.setState({ requestTitle, openAlertRepublish: true });
   };
 
   render() {
@@ -51,6 +61,21 @@ class ModalUserRequest extends Component {
             >
               <Alert.Heading>
                 Your Request {`${this.state.requestTitle}`} is done
+              </Alert.Heading>
+              <p>Hope you found a good help</p>
+            </Alert>
+          </div>
+        )}
+        {this.state.openAlertRepublish && (
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Alert
+              variant="success"
+              onClose={() => this.setState({ openAlertRepublish: false })}
+              dismissible
+              style={{ width: "400px" }}
+            >
+              <Alert.Heading>
+                Your Request {`${this.state.requestTitle}`} is republish
               </Alert.Heading>
               <p>Hope you found a good help</p>
             </Alert>
@@ -92,6 +117,17 @@ class ModalUserRequest extends Component {
                               >
                                 Done
                               </Button>
+                              {request && request.status === "fulfilled" && (
+                                <Button
+                                  style={{ marginLeft: "5px" }}
+                                  variant="success"
+                                  onClick={() =>
+                                    this.handleRepublish(request.id, request.title)
+                                  }
+                                >
+                                  Republish
+                                </Button>
+                              )}
                             </Card.Body>
                           </Card>
                         </Col>

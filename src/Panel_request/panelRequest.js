@@ -4,7 +4,7 @@ import SlidingPanel from "react-sliding-panel";
 import "./panel-request.scss";
 import moment from "moment";
 import MapRequest from "../Map/map";
-import { sendEmail } from "../api/backendApi";
+import { sendEmail, createMessage } from "../api/backendApi";
 
 class PanelRequest extends Component {
   constructor(props) {
@@ -24,6 +24,7 @@ class PanelRequest extends Component {
       this.props.request.user_id,
       this.state.message
     );
+    createMessage(this.props.request.id, localStorage.user_id, this.state.message)
     this.props.handleOpenAlert(true);
     this.props.setIsOpenPanel(false);
   };
