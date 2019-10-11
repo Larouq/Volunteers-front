@@ -7,6 +7,7 @@ import {
   republishRequest
 } from "../api/backendApi";
 import "./modelUserRequest.scss";
+import moment from "moment";
 
 class ModalUserRequest extends Component {
   constructor(props) {
@@ -38,6 +39,11 @@ class ModalUserRequest extends Component {
   handleRepublish = (requestId, requestTitle) => {
     republishRequest(requestId);
     this.setState({ requestTitle, openAlertRepublish: true });
+  };
+
+  isRepublish = (now, updatedAt) => {
+    const timeDiff = now - updatedAt;
+    if (timeDiff > 86400000) return true
   };
 
   render() {
@@ -117,17 +123,25 @@ class ModalUserRequest extends Component {
                               >
                                 Done
                               </Button>
-                              {request && request.status === "fulfilled" && (
-                                <Button
-                                  style={{ marginLeft: "5px" }}
-                                  variant="success"
-                                  onClick={() =>
-                                    this.handleRepublish(request.id, request.title)
-                                  }
-                                >
-                                  Republish
-                                </Button>
-                              )}
+                              {request &&
+                                request.status === "fulfilled" &&
+                                this.isRepublish(
+                                  moment(),
+                                  moment(request.updated_at)
+                                ) && (
+                                  <Button
+                                    style={{ marginLeft: "5px" }}
+                                    variant="success"
+                                    onClick={() =>
+                                      this.handleRepublish(
+                                        request.id,
+                                        request.title
+                                      )
+                                    }
+                                  >
+                                    Republish
+                                  </Button>
+                                )}
                             </Card.Body>
                           </Card>
                         </Col>
