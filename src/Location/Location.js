@@ -38,6 +38,27 @@ class Location extends Component {
         return result;
       })
     });
+    try {
+      setInterval(async () => {
+        const requests = await fetchRequests(
+          authentication_token,
+          client,
+          email,
+          null
+        );
+        this.setState({
+          requests: requests.map(request => {
+            const result = {
+              point: turf.point([request.lng, request.lat]),
+              ...request
+            };
+            return result;
+          })
+        });
+      }, 3600000);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   handleOpenAlert = value => {
@@ -61,10 +82,12 @@ class Location extends Component {
     });
   };
 
-  getStatRequest = (arrayRequests) => {
-    const filterRequests = arrayRequests.filter(request => request.status === "unfulfilled")
-    return filterRequests.length
-  }
+  getStatRequest = arrayRequests => {
+    const filterRequests = arrayRequests.filter(
+      request => request.status === "unfulfilled"
+    );
+    return filterRequests.length;
+  };
 
   render() {
     return (
@@ -126,7 +149,9 @@ class Location extends Component {
                 <Card.Body>
                   {this.state.requests
                     ? `Hey, we have ${this.state.requests &&
-                        this.getStatRequest(this.state.requests)} unfulfilled requests, 
+                        this.getStatRequest(
+                          this.state.requests
+                        )} unfulfilled requests, 
                 do not hesitate to offer your help!`
                     : "No unfulfilled request for the moment"}
                 </Card.Body>
