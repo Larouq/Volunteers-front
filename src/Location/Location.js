@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Container, Alert } from "react-bootstrap";
+import { Container, Alert, Card } from "react-bootstrap";
 import "./Location.scss";
 import { fetchRequests } from "../api/backendApi";
 import MapRequest from "../Map/map";
@@ -61,6 +61,11 @@ class Location extends Component {
     });
   };
 
+  getStatRequest = (arrayRequests) => {
+    const filterRequests = arrayRequests.filter(request => request.status === "unfulfilled")
+    return filterRequests.length
+  }
+
   render() {
     return (
       <Fragment>
@@ -117,6 +122,15 @@ class Location extends Component {
                   </Alert>
                 </div>
               )}
+              <Card>
+                <Card.Body>
+                  {this.state.requests
+                    ? `Hey, we have ${this.state.requests &&
+                        this.getStatRequest(this.state.requests)} unfulfilled requests, 
+                do not hesitate to offer your help!`
+                    : "No unfulfilled request for the moment"}
+                </Card.Body>
+              </Card>
               {this.state.requests &&
                 this.state.requests
                   .filter(
