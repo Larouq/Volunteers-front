@@ -147,7 +147,12 @@ class Location extends Component {
               )}
               <Card>
                 <Card.Body>
-                  {this.state.requests
+                  {this.state.requests &&
+                  this.state.requests.filter(
+                    request =>
+                      request.status === "unfulfilled" &&
+                      request.statement === "working"
+                  )
                     ? `Hey, we have ${this.state.requests &&
                         this.getStatRequest(
                           this.state.requests
