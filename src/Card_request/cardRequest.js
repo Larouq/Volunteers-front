@@ -19,7 +19,7 @@ class CardRequest extends Component {
       <div>
         <Row>
           <Col xs={12}>
-            <Card className={"requests"}>
+            <Card className={"requests"} style={{height: "22vh"}}>
               <Card.Img
                 variant="top"
                 src={`https://source.unsplash.com/user/erondu`}
