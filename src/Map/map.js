@@ -44,7 +44,7 @@ class MapRequest extends Component {
                 <div className={`${request.category}__popup`}>
                   <p style={{fontWeight: "bold"}}>{request.title}</p>
                   <img
-                    src={"https://source.unsplash.com/user/erondu"}
+                    src={"https://source.unsplash.com/user/augustindem/Vi9cHboZwss"}
                     style={{
                       borderRadius: "50%",
                       width: "70px",
