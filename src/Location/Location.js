@@ -84,7 +84,7 @@ class Location extends Component {
 
   getStatRequest = arrayRequests => {
     const filterRequests = arrayRequests.filter(
-      request => request.status === "unfulfilled"
+      request => request.status === "unfulfilled" && request.statement === "working"
     );
     return filterRequests.length;
   };
@@ -147,18 +147,13 @@ class Location extends Component {
               )}
               <Card>
                 <Card.Body>
-                  {this.state.requests &&
-                  this.state.requests.filter(
-                    request =>
-                      request.status === "unfulfilled" &&
-                      request.statement === "working"
-                  )
-                    ? `Hey, we have ${this.state.requests &&
+                  {!this.getStatRequest(this.state.requests)
+                    ? "No unfulfilled request for the moment"
+                    : `Hey, we have ${this.state.requests &&
                         this.getStatRequest(
                           this.state.requests
                         )} unfulfilled requests, 
-                do not hesitate to offer your help!`
-                    : "No unfulfilled request for the moment"}
+                do not hesitate to offer your help!`}
                 </Card.Body>
               </Card>
               {this.state.requests &&

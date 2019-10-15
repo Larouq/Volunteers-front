@@ -140,7 +140,8 @@ export async function createMessage(requestID, userId, content) {
 export async function deleteRequest(requestId) {
   try {
     const params = {
-      statement: 1
+      statement: 1,
+      status: 1
     };
     const result = await axios.put(
       `${BACKEND_API_URL}/requests/${requestId}`,
