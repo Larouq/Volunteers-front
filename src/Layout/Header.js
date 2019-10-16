@@ -166,7 +166,7 @@ class Header extends Component {
                       this.setState({ openModalUserRequest: true })
                     }
                   >
-                    my resquest
+                    my requests
                   </div>
                   <div
                     className="navlink"
