@@ -98,7 +98,7 @@ export async function submitRequest(access_token, client, uid, form) {
     });
     return result;
   } catch (error) {
-    return error.response;
+    return alert(new Error(`${error.response}`));
   }
 }
 
@@ -133,7 +133,7 @@ export async function createMessage(requestID, userId, content) {
       params
     );
   } catch (error) {
-    return error.response;
+    return alert(new Error(`${error.response}`));
   }
 }
 
@@ -149,7 +149,7 @@ export async function deleteRequest(requestId) {
     );
     return result;
   } catch (error) {
-    return error.response;
+    return alert(new Error(`${error.response}`));
   }
 }
 
@@ -164,7 +164,7 @@ export async function republishRequest(requestId) {
     );
     return result;
   } catch (error) {
-    return error.response;
+    return alert(new Error(`${error.response}`));
   }
 }
 
