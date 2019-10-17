@@ -14,6 +14,7 @@ import { submitRegistration } from "../api/backendApi.js";
 import { withRouter } from "react-router";
 import Dropzone from "react-dropzone-uploader";
 import "react-dropzone-uploader/dist/styles.css";
+import axios from "axios";
 
 class Home extends Component {
   constructor(props) {
@@ -61,14 +62,15 @@ class Home extends Component {
 
   handleSubmitFile = (files, allFiles) => {
     files.map(f => {
-      console.log(f);
+      console.log('f', f)
       return this.setState({ image: f.meta.previewUrl, alertImage: true });
     });
     allFiles.forEach(f => f.remove());
   };
 
-  getUploadParams = () => {
-    return { url: "https://httpbin.org/post" };
+  getUploadParams = async ({meta}) => {
+    const result = await axios.post('http://httpbin.org/post', meta)
+    return result
   };
 
   handleSubmit = async () => {
