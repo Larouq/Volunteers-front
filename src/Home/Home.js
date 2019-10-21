@@ -14,7 +14,6 @@ import { submitRegistration } from "../api/backendApi.js";
 import { withRouter } from "react-router";
 import Dropzone from "react-dropzone-uploader";
 import "react-dropzone-uploader/dist/styles.css";
-import axios from "axios";
 
 class Home extends Component {
   constructor(props) {
@@ -62,15 +61,14 @@ class Home extends Component {
 
   handleSubmitFile = (files, allFiles) => {
     files.map(f => {
-      console.log('f', f)
+      console.log(f);
       return this.setState({ image: f.meta.previewUrl, alertImage: true });
     });
     allFiles.forEach(f => f.remove());
   };
 
-  getUploadParams = async ({meta}) => {
-    const result = await axios.post('http://httpbin.org/post', meta)
-    return result
+  getUploadParams = () => {
+    return { url: "https://httpbin.org/post" };
   };
 
   handleSubmit = async () => {
@@ -198,10 +196,9 @@ class Home extends Component {
                     maxFiles={1}
                     handleChangeStatus={this.handleChangeStatus}
                     onSubmit={this.handleSubmitFile}
-                    canCancel={true}
                     submitButtonContent={'Upload ID'}
                     inputContent="Drop your ID"
-                    accept="image/*,.pdf"
+                    accept="image/*"
                   />
                   <Button
                     style={{ marginTop: "10px" }}
