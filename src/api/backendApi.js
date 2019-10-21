@@ -50,23 +50,31 @@ export async function submitAuthentification(form) {
   }
 }
 
-export async function fetchRequests(access_token, client, uid, userId) {
+export async function fetchRequests(access_token, client, uid) {
   try {
-    const results = await axios.get(
-      `${BACKEND_API_URL}/requests`,
-      {
-        params: {
-          user_id: userId
-        }
-      },
-      {
-        headers: {
-          "access-token": access_token,
-          client: client,
-          uid: uid
-        }
+    const results = await axios.get(`${BACKEND_API_URL}/requests`, {
+      headers: {
+        "access-token": access_token,
+        client: client,
+        uid: uid
       }
-    );
+    });
+    return results.data;
+  } catch (error) {
+    alert(new Error("backend API request failed"));
+  }
+}
+
+export async function fetchUserRequests(access_token, client, uid, userId) {
+  try {
+    const results = await axios.get(`${BACKEND_API_URL}/requests`, {
+      params: { user_id: userId },
+      headers: {
+        "access-token": access_token,
+        client: client,
+        uid: uid
+      }
+    });
     return results.data;
   } catch (error) {
     alert(new Error("backend API request failed"));
@@ -137,30 +145,45 @@ export async function createMessage(requestID, userId, content) {
   }
 }
 
-export async function deleteRequest(requestId) {
+export async function deleteRequest(access_token, client, uid, requestId) {
   try {
     const params = {
-      statement: 1,
-      status: 1
+      status: 1,
+      statement: 1
     };
     const result = await axios.put(
       `${BACKEND_API_URL}/requests/${requestId}`,
-      params
+      params,
+      {
+        headers: {
+          "access-token": access_token,
+          client: client,
+          uid: uid
+        }
+      }
     );
+    console.log(result);
     return result;
   } catch (error) {
     return alert(new Error(`${error.response}`));
   }
 }
 
-export async function republishRequest(requestId) {
+export async function republishRequest(access_token, client, uid, requestId) {
   try {
     const params = {
       status: 0
     };
     const result = await axios.put(
       `${BACKEND_API_URL}/requests/${requestId}`,
-      params
+      params,
+      {
+        headers: {
+          "access-token": access_token,
+          client: client,
+          uid: uid
+        }
+      }
     );
     return result;
   } catch (error) {
@@ -172,6 +195,7 @@ export default {
   submitRegistration,
   submitAuthentification,
   fetchRequests,
+  fetchUserRequests,
   submitRequest,
   getAddress,
   sendEmail,

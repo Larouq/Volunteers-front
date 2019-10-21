@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Modal, Button, Card, Row, Col, Alert } from "react-bootstrap";
 import { withRouter } from "react-router";
 import {
-  fetchRequests,
+  fetchUserRequests,
   deleteRequest,
   republishRequest
 } from "../api/backendApi";
@@ -22,7 +22,7 @@ class ModalUserRequest extends Component {
 
   async componentDidMount() {
     const { authentication_token, client, email } = localStorage;
-    const requests = await fetchRequests(
+    const requests = await fetchUserRequests(
       authentication_token,
       client,
       email,
@@ -32,7 +32,8 @@ class ModalUserRequest extends Component {
   }
 
   handleSubmit = (requestId, requestTitle) => {
-    deleteRequest(requestId);
+    const { authentication_token, client, email } = localStorage;
+    deleteRequest(authentication_token, client, email, requestId);
     this.setState({ requestTitle, openAlertDeleteRequest: true });
   };
 
@@ -43,7 +44,7 @@ class ModalUserRequest extends Component {
 
   isRepublish = (now, updatedAt) => {
     const timeDiff = now - updatedAt;
-    if (timeDiff > 86400000) return true
+    if (timeDiff > 86400000) return true;
   };
 
   render() {
