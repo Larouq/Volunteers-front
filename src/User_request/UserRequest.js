@@ -1,11 +1,17 @@
 import React, { Component, Fragment } from "react";
 import { Button, Card, Row, Col } from "react-bootstrap";
 import { withRouter } from "react-router";
-import { fetchUserRequests, deleteRequest } from "../api/backendApi";
+import {
+  fetchUserRequests,
+  deleteRequest,
+  republishRequest,
+  fetchUserMessage
+} from "../api/backendApi";
 import ModalUserMessage from "../Modal_userMessage/modalUserMessage";
-import "./userProposal.scss";
+import "./userRequest.scss";
+import moment from "moment";
 
-class UserProposal extends Component {
+class UserRequest extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,10 +32,19 @@ class UserProposal extends Component {
     this.setState({ requests });
   }
 
-  handleSubmit = (requestId, requestTitle) => {
+  handleDeleteRequest = requestId => {
     const { authentication_token, client, email } = localStorage;
     deleteRequest(authentication_token, client, email, requestId);
-    this.setState({ requestTitle, openAlertDeleteRequest: true });
+  };
+
+  handleRepublish = requestId => {
+    const { authentication_token, client, email } = localStorage;
+    republishRequest(authentication_token, client, email, requestId);
+  };
+
+  isRepublish = (now, updatedAt) => {
+    const timeDiff = now - updatedAt;
+    if (timeDiff > 86400000) return true;
   };
 
   render() {
@@ -38,11 +53,7 @@ class UserProposal extends Component {
         <div style={{ display: "flex", flexDirection: "column" }}>
           {this.state.requests &&
             this.state.requests
-              .filter(
-                request =>
-                  request.status === "unfulfilled" &&
-                  request.statement === "working"
-              )
+              .filter(request => request.statement === "working")
               .map(request => {
                 return (
                   <div key={(Math.floor(Math.random() * 10000) + 1).toString()}>
@@ -77,6 +88,35 @@ class UserProposal extends Component {
                               messages
                             </Button>
                           </Card.Body>
+                          <Card.Footer>
+                            <Button
+                              onClick={() => {
+                                this.handleDeleteRequest(request.id);
+                                window.location.reload();
+                              }}
+                              variant="dark"
+                            >
+                              Done
+                            </Button>
+                            {request &&
+                              request.status === "fulfilled" &&
+                              this.isRepublish(
+                                moment(),
+                                moment(request.updated_at)
+                              ) && (
+                                <Button
+                                  style={{ marginLeft: "5px" }}
+                                  variant="success"
+                                  onClick={() => {
+                                    console.log("requestId", request.id);
+                                    this.handleRepublish(request.id);
+                                    window.location.reload();
+                                  }}
+                                >
+                                  Republish
+                                </Button>
+                              )}
+                          </Card.Footer>
                         </Card>
                       </Col>
                     </Row>
@@ -101,4 +141,4 @@ class UserProposal extends Component {
   }
 }
 
-export default withRouter(UserProposal);
+export default withRouter(UserRequest);

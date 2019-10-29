@@ -64,7 +64,7 @@ class ModalUserMessage extends Component {
                   </div>
                 );
               })
-            : "you don't have message"}
+            : "you don't have message for this request"}
           <label className={"label"} form={"message"} />
           <textarea
             className={"text_message"}

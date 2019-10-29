@@ -6,7 +6,6 @@ import { submitAuthentification } from "../api/backendApi.js";
 import "./Layout.scss";
 import { withRouter } from "react-router";
 import ModalCreateRequest from "../Modal_createRequest/modalRequest";
-import ModalUserRequest from "../Modal_userRequest/modalUserRequest";
 import ModalLogin from "../Modal_login/modalLogin";
 
 class Header extends Component {
@@ -17,7 +16,6 @@ class Header extends Component {
       password: "",
       user: {},
       openModal: false,
-      openModalUserRequest: false,
       openAlert: false,
       displayBurger: true,
       openModalLogin: false,
@@ -163,18 +161,7 @@ class Header extends Component {
                   <div
                     className="navlink"
                     style={{ marginRight: "20px" }}
-                    onClick={() =>
-                      this.props.history.push("/request")
-                    }
-                  >
-                    my proposals
-                  </div>
-                  <div
-                    className="navlink"
-                    style={{ marginRight: "20px" }}
-                    onClick={() =>
-                      this.setState({ openModalUserRequest: true })
-                    }
+                    onClick={() => this.props.history.push("/request")}
                   >
                     my requests
                   </div>
@@ -206,14 +193,11 @@ class Header extends Component {
                   <div
                     className="menu-item"
                     onClick={() => {
-                      this.setState({
-                        openModalUserRequest: true
-                      });
+                      this.props.history.push("/request");
                       this.closeMenu();
                     }}
-                    style={{ cursor: "pointer" }}
                   >
-                    my request
+                    my requests
                   </div>
                   <div
                     className="menu-item"
@@ -247,17 +231,6 @@ class Header extends Component {
                     this.setState({ openModal: false });
                   }}
                   userId={localStorage.user_id}
-                />
-              }
-              {
-                <ModalUserRequest
-                  show={this.state.openModalUserRequest}
-                  onHide={() => {
-                    this.setState({ openModalUserRequest: false });
-                  }}
-                  onCloseModal={() => {
-                    this.setState({ openModalUserRequest: false });
-                  }}
                 />
               }
               {

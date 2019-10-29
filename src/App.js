@@ -6,7 +6,7 @@ import Footer from "./Layout/Footer";
 import Location from "./Location/Location";
 import "./App.css";
 import { PrivateRoute } from "./helpers/PrivateRoute";
-import UserProposal from "./User_proposal/UserProposal";
+import UserRequest from "./User_request/UserRequest";
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
           )}
         />
         <PrivateRoute exact path="/location" component={Location} />
-        <PrivateRoute exact path="/request" component={UserProposal} />
+        <PrivateRoute exact path="/request" component={UserRequest} />
       </div>
       <Footer />
     </Router>
