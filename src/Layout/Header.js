@@ -21,6 +21,7 @@ class Header extends Component {
       openAlert: false,
       displayBurger: true,
       openModalLogin: false,
+      openModalMessage: false,
       isOpenBurgerMenu: false
     };
   }
@@ -159,6 +160,15 @@ class Header extends Component {
                   }}
                   className="burger__menu"
                 >
+                  <div
+                    className="navlink"
+                    style={{ marginRight: "20px" }}
+                    onClick={() =>
+                      this.props.history.push("/request")
+                    }
+                  >
+                    my proposals
+                  </div>
                   <div
                     className="navlink"
                     style={{ marginRight: "20px" }}

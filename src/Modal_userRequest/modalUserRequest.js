@@ -14,6 +14,7 @@ class ModalUserRequest extends Component {
     super(props);
     this.state = {
       requests: [],
+      requestId: null,
       openAlertDeleteRequest: false,
       openAlertRepublish: false,
       requestTitle: ""

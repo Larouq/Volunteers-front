@@ -81,6 +81,22 @@ export async function fetchUserRequests(access_token, client, uid, userId) {
   }
 }
 
+export async function fetchUserMessage(access_token, client, uid, userId, id) {
+  try {
+    const results = await axios.get(`${BACKEND_API_URL}/requests/${id}/messages`, {
+      params: { user_id: userId },
+      headers: {
+        "access-token": access_token,
+        client: client,
+        uid: uid
+      }
+    });
+    return results.data;
+  } catch (error) {
+    alert(new Error("backend API request failed"));
+  }
+}
+
 export async function submitRequest(access_token, client, uid, form) {
   const { title, address, description, user_id, category, name } = form;
   const lng = form.geoObject.Point.pos.split(" ")[0];

@@ -18,7 +18,7 @@ class CardRequest extends Component {
     return (
       <div>
         <Row>
-          <Col xs={12}>
+          <Col xs={this.props.col}>
             <Card className={"requests"} style={{height: "22vh"}}>
               <Card.Img
                 variant="top"

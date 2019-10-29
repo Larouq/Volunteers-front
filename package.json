@@ -19,6 +19,7 @@
     "react": "^16.8.5",
     "react-bootstrap": "^1.0.0-beta.6",
     "react-burger-menu": "^2.6.5",
+    "react-chat-elements": "^10.7.1",
     "react-dom": "^16.8.5",
     "react-dropzone-uploader": "^2.10.1",
     "react-mapbox-gl": "^4.2.1",
