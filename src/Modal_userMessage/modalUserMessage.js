@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { withRouter } from "react-router";
-import { fetchUserMessage, createMessage } from "../api/backendApi";
+import { fetchUserResponse, createMessage } from "../api/backendApi";
 import "./modelUserMessage.scss";
 import { ChatItem } from "react-chat-elements";
 import "react-chat-elements/dist/main.css";
@@ -10,7 +10,7 @@ class ModalUserMessage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [],
+      responses: [],
       text: ""
     };
   }
@@ -18,7 +18,7 @@ class ModalUserMessage extends Component {
   async componentDidMount() {
     const { authentication_token, client, email } = localStorage;
 
-    const messages = await fetchUserMessage(
+    const responses = await fetchUserResponse(
       authentication_token,
       client,
       email,
@@ -26,7 +26,7 @@ class ModalUserMessage extends Component {
       this.props.requestId
     );
 
-    this.setState({ messages });
+    this.setState({ responses });
   }
 
   handleTextMessage = elem => {
@@ -49,8 +49,9 @@ class ModalUserMessage extends Component {
           <Modal.Title>Your messages</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {this.state.messages && this.state.messages.length
-            ? this.state.messages.map(message => {
+          {this.state.responses && this.state.responses.length
+            ? this.state.responses.map(message => {
+                console.log(message)
                 return (
                   <div key={message.id}>
                     <ChatItem
@@ -74,7 +75,7 @@ class ModalUserMessage extends Component {
           <Button
             variant="success"
             onClick={this.handleSubmitMessage}
-            disabled={!this.state.text || !this.state.messages.length}
+            disabled={!this.state.text || !this.state.responses.length}
           >
             Reply
           </Button>

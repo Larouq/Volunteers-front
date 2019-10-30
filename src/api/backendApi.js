@@ -81,9 +81,9 @@ export async function fetchUserRequests(access_token, client, uid, userId) {
   }
 }
 
-export async function fetchUserMessage(access_token, client, uid, userId, id) {
+export async function fetchUserResponse(access_token, client, uid, userId, id) {
   try {
-    const results = await axios.get(`${BACKEND_API_URL}/requests/${id}/messages`, {
+    const results = await axios.get(`${BACKEND_API_URL}/requests/${id}/responses`, {
       params: { user_id: userId },
       headers: {
         "access-token": access_token,
@@ -217,5 +217,6 @@ export default {
   sendEmail,
   createMessage,
   deleteRequest,
-  republishRequest
+  republishRequest,
+  fetchUserResponse
 };

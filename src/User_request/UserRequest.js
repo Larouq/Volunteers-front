@@ -5,7 +5,7 @@ import {
   fetchUserRequests,
   deleteRequest,
   republishRequest,
-  fetchUserMessage
+  fetchUserResponse
 } from "../api/backendApi";
 import ModalUserMessage from "../Modal_userMessage/modalUserMessage";
 import "./userRequest.scss";
@@ -66,7 +66,11 @@ class UserRequest extends Component {
                             style={{ width: "35%", height: "100%" }}
                           />
                           <Card.Body>
-                            <Card.Title>{request.title}</Card.Title>
+                            <Card.Title>
+                              {request.title}{" "}
+                              {request.count_helper !== 0 &&
+                                `(${request.count_helper} helpers)`}
+                            </Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">
                               Status: {request.status}
                             </Card.Subtitle>
@@ -76,17 +80,19 @@ class UserRequest extends Component {
                             <Card.Text className="text__request">
                               {request.description}
                             </Card.Text>
-                            <Button
-                              onClick={() =>
-                                this.setState({
-                                  openModalUserMessage: true,
-                                  requestId: request.id
-                                })
-                              }
-                              variant="primary"
-                            >
-                              messages
-                            </Button>
+                            {request.count_helper !== 0 && (
+                              <Button
+                                onClick={() =>
+                                  this.setState({
+                                    openModalUserMessage: true,
+                                    requestId: request.id
+                                  })
+                                }
+                                variant="primary"
+                              >
+                                messages
+                              </Button>
+                            )}
                           </Card.Body>
                           <Card.Footer>
                             <Button
