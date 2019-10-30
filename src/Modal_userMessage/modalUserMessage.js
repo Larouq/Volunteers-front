@@ -13,11 +13,16 @@ class ModalUserMessage extends Component {
       responses: [],
       text: "",
       userId: 0,
-      responseId: 0
+      responseId: 0,
     };
   }
 
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  };
+
   async componentDidMount() {
+    this.scrollToBottom();
     const { authentication_token, client, email } = localStorage;
 
     const responses = await fetchUserResponse(
@@ -39,10 +44,14 @@ class ModalUserMessage extends Component {
           this.props.requestId
         );
         this.setState({ responses });
-      }, 2000000);
+      }, 20000);
     } catch (error) {
       return alert(new Error(`${error.response}`));
     }
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
   }
 
   handleTextMessage = elem => {
@@ -51,7 +60,7 @@ class ModalUserMessage extends Component {
 
   handleSubmitMessage = responseId => {
     createMessage(responseId, localStorage.user_id, this.state.text);
-    this.setState({text: ""})
+    this.setState({ text: "" });
   };
 
   displayConversation = async (userId, responseId) => {
@@ -78,9 +87,10 @@ class ModalUserMessage extends Component {
                     <Button
                       variant="outline-primary"
                       className="user_name"
-                      onClick={() =>
-                        this.displayConversation(response.user_id, response.id)
-                      }
+                      active={response.user_id === this.state.userId}
+                      onClick={() => {
+                        this.displayConversation(response.user_id, response.id);
+                      }}
                     >
                       {response.name}
                     </Button>
@@ -89,7 +99,12 @@ class ModalUserMessage extends Component {
               })}
           </div>
           <div>
-            <div className="message-box">
+            <div
+              className="message-box"
+              ref={el => {
+                this.messagesEnd = el;
+              }}
+            >
               {this.state.responses &&
                 this.state.responses
                   .filter(response => response.user_id === this.state.userId)
@@ -121,7 +136,7 @@ class ModalUserMessage extends Component {
           <Button
             variant="success"
             onClick={() => {
-              this.handleSubmitMessage(this.state.responseId)
+              this.handleSubmitMessage(this.state.responseId);
             }}
             disabled={!this.state.text || !this.state.responses.length}
           >
