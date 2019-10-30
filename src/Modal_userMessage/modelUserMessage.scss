@@ -3,6 +3,26 @@
     overflow-y: scroll;
 }
 
+.user_response {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.user_name{
+    margin-left: 15px;
+}
+
+.message-box {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.request_conversation {
+    width: 70%;
+    margin-top: 20px;
+}
+
 .text_message{
     width: 50%;
     display: block;

@@ -4,8 +4,7 @@ import { withRouter } from "react-router";
 import {
   fetchUserRequests,
   deleteRequest,
-  republishRequest,
-  fetchUserResponse
+  republishRequest
 } from "../api/backendApi";
 import ModalUserMessage from "../Modal_userMessage/modalUserMessage";
 import "./userRequest.scss";
@@ -50,6 +49,15 @@ class UserRequest extends Component {
   render() {
     return (
       <Fragment>
+        <Row style={{ justifyContent: "center" }}>
+          <Col xs={6}>
+            {!this.state.requests.length && (
+              <Card>
+                <Card.Body>You have no request</Card.Body>
+              </Card>
+            )}
+          </Col>
+        </Row>
         <div style={{ display: "flex", flexDirection: "column" }}>
           {this.state.requests &&
             this.state.requests
@@ -68,8 +76,9 @@ class UserRequest extends Component {
                           <Card.Body>
                             <Card.Title>
                               {request.title}{" "}
-                              {request.count_helper !== 0 &&
-                                `(${request.count_helper} helpers)`}
+                              {request.count_helper !== 0
+                                ? `(${request.count_helper} helpers)`
+                                : "(no helper)"}
                             </Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">
                               Status: {request.status}
