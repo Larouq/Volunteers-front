@@ -23,6 +23,18 @@ class ModalProposalMessage extends Component {
     this.setState({ text: "" });
   };
 
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  };
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   render() {
     return (
       <Modal
@@ -51,6 +63,11 @@ class ModalProposalMessage extends Component {
                   </div>
                 );
               })}
+            <div
+              ref={el => {
+                this.messagesEnd = el;
+              }}
+            />
           </div>
           <label className={"label"} form={"message"} />
           <textarea
@@ -63,6 +80,7 @@ class ModalProposalMessage extends Component {
             variant="success"
             onClick={() => {
               this.handleSubmitMessage(this.props.proposals[0].id);
+              this.props.refetch();
             }}
             disabled={!this.state.text}
           >

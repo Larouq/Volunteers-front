@@ -14,7 +14,11 @@ class UserProposal extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.fetchProposal();
+  }
+
+  fetchProposal = async () => {
     const { authentication_token, client, email, user_id } = localStorage;
     const proposals = await fetchResponses(authentication_token, client, email);
 
@@ -23,7 +27,7 @@ class UserProposal extends Component {
         return proposal.user_id.toString() === user_id;
       })
     });
-  }
+  };
 
   render() {
     return (
@@ -92,6 +96,7 @@ class UserProposal extends Component {
                 proposal => proposal.id === this.state.responseId
               )
             }
+            refetch={this.fetchProposal}
             onHide={() => {
               this.setState({ openModalProposalMessage: false });
             }}

@@ -13,7 +13,7 @@ class ModalUserMessage extends Component {
       responses: [],
       text: "",
       userId: 0,
-      responseId: 0,
+      responseId: 0
     };
   }
 
@@ -33,7 +33,7 @@ class ModalUserMessage extends Component {
       this.props.requestId
     );
 
-    this.setState({ responses, userId: responses[0].user_id});
+    this.setState({ responses, userId: responses[0].user_id });
 
     try {
       setInterval(async () => {
@@ -45,7 +45,7 @@ class ModalUserMessage extends Component {
           this.props.requestId
         );
         this.setState({ responses });
-      }, 200000);
+      }, 1500);
     } catch (error) {
       return alert(new Error(`${error.response}`));
     }
@@ -100,12 +100,7 @@ class ModalUserMessage extends Component {
               })}
           </div>
           <div>
-            <div
-              className="message-box"
-              ref={el => {
-                this.messagesEnd = el;
-              }}
-            >
+            <div className="message-box">
               {this.state.responses &&
                 this.state.responses
                   .filter(response => response.user_id === this.state.userId)
@@ -125,6 +120,11 @@ class ModalUserMessage extends Component {
                       );
                     });
                   })}
+              <div
+                ref={el => {
+                  this.messagesEnd = el;
+                }}
+              />
             </div>
           </div>
           <label className={"label"} form={"message"} />
