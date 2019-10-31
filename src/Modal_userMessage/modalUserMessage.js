@@ -45,7 +45,7 @@ class ModalUserMessage extends Component {
           this.props.requestId
         );
         this.setState({ responses });
-      }, 200);
+      }, 200000);
     } catch (error) {
       return alert(new Error(`${error.response}`));
     }

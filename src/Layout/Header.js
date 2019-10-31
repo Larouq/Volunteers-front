@@ -161,6 +161,13 @@ class Header extends Component {
                   <div
                     className="navlink"
                     style={{ marginRight: "20px" }}
+                    onClick={() => this.props.history.push("/proposal")}
+                  >
+                    my proposals
+                  </div>
+                  <div
+                    className="navlink"
+                    style={{ marginRight: "20px" }}
                     onClick={() => this.props.history.push("/request")}
                   >
                     my requests
@@ -173,7 +180,7 @@ class Header extends Component {
                   </div>
                   <div
                     className="navlink"
-                    style={{ marginLeft: "20px" }}
+                    style={{ marginLeft: "70px" }}
                     onClick={async () => {
                       await localStorage.clear();
                       this.setState({ email: "", password: "" });

@@ -7,6 +7,7 @@ import Location from "./Location/Location";
 import "./App.css";
 import { PrivateRoute } from "./helpers/PrivateRoute";
 import UserRequest from "./User_request/UserRequest";
+import UserPropsal from "./User_proposal/UserProposal";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         />
         <PrivateRoute exact path="/location" component={Location} />
         <PrivateRoute exact path="/request" component={UserRequest} />
+        <PrivateRoute exact path="/proposal" component={UserPropsal} />
       </div>
       <Footer />
     </Router>

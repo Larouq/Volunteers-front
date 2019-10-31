@@ -83,14 +83,17 @@ export async function fetchUserRequests(access_token, client, uid, userId) {
 
 export async function fetchUserResponse(access_token, client, uid, userId, id) {
   try {
-    const results = await axios.get(`${BACKEND_API_URL}/requests/${id}/responses`, {
-      params: { user_id: userId },
-      headers: {
-        "access-token": access_token,
-        client: client,
-        uid: uid
+    const results = await axios.get(
+      `${BACKEND_API_URL}/requests/${id}/responses`,
+      {
+        params: { user_id: userId },
+        headers: {
+          "access-token": access_token,
+          client: client,
+          uid: uid
+        }
       }
-    });
+    );
     return results.data;
   } catch (error) {
     alert(new Error("backend API request failed"));
@@ -146,7 +149,14 @@ export async function sendEmail(from, to, message) {
   return axios.post(`${BACKEND_API_URL}/sendemail`, params);
 }
 
-export async function createResponse(requestID, userId, content) {
+export async function createResponse(
+  requestID,
+  userId,
+  content,
+  access_token,
+  client,
+  uid
+) {
   try {
     const params = {
       user_id: userId,
@@ -154,14 +164,28 @@ export async function createResponse(requestID, userId, content) {
     };
     return axios.post(
       `${BACKEND_API_URL}/requests/${requestID}/responses`,
-      params
+      params,
+      {
+        headers: {
+          "access-token": access_token,
+          client: client,
+          uid: uid
+        }
+      }
     );
   } catch (error) {
     return alert(new Error(`${error.response}`));
   }
 }
 
-export async function createMessage(requestID, userId, content) {
+export async function createMessage(
+  requestID,
+  userId,
+  content,
+  access_token,
+  client,
+  uid
+) {
   try {
     const params = {
       user_id: userId,
@@ -169,10 +193,35 @@ export async function createMessage(requestID, userId, content) {
     };
     return axios.post(
       `${BACKEND_API_URL}/responses/${requestID}/messages`,
-      params
+      params,
+      {
+        headers: {
+          "access-token": access_token,
+          client: client,
+          uid: uid
+        }
+      }
     );
   } catch (error) {
     return alert(new Error(`${error.response}`));
+  }
+}
+
+export async function fetchResponses (access_token, client, uid) {
+  try {
+    const results = await axios.get(
+      `${BACKEND_API_URL}/responses`,
+      {
+        headers: {
+          "access-token": access_token,
+          client: client,
+          uid: uid
+        }
+      }
+    );
+    return results.data;
+  } catch (error) {
+    alert(new Error("backend API request failed"));
   }
 }
 
@@ -220,18 +269,3 @@ export async function republishRequest(access_token, client, uid, requestId) {
     return alert(new Error(`${error.response}`));
   }
 }
-
-export default {
-  submitRegistration,
-  submitAuthentification,
-  fetchRequests,
-  fetchUserRequests,
-  submitRequest,
-  getAddress,
-  sendEmail,
-  createResponse,
-  createMessage,
-  deleteRequest,
-  republishRequest,
-  fetchUserResponse
-};
