@@ -33,7 +33,8 @@ class ModalUserMessage extends Component {
       this.props.requestId
     );
 
-    this.setState({ responses });
+    this.setState({ responses, userId: responses[0].user_id});
+
     try {
       setInterval(async () => {
         const responses = await fetchUserResponse(
@@ -44,7 +45,7 @@ class ModalUserMessage extends Component {
           this.props.requestId
         );
         this.setState({ responses });
-      }, 20000);
+      }, 200);
     } catch (error) {
       return alert(new Error(`${error.response}`));
     }

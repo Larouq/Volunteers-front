@@ -99,7 +99,7 @@ class UserRequest extends Component {
                                 }
                                 variant="primary"
                               >
-                                messages
+                                See messages
                               </Button>
                             )}
                           </Card.Body>
