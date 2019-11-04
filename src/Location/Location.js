@@ -55,7 +55,7 @@ class Location extends Component {
             return result;
           })
         });
-      }, 5000000);
+      }, 5000);
     } catch (error) {
       console.log(error);
     }
