@@ -3,6 +3,7 @@ import { Button, Card, Row, Col } from "react-bootstrap";
 import { withRouter } from "react-router";
 import { fetchResponses } from "../api/backendApi";
 import ModalProposalMessage from "../Modal_proposalMessage/modalProposalMessage";
+import "./userProposal.scss";
 
 class UserProposal extends Component {
   constructor(props) {
@@ -10,11 +11,13 @@ class UserProposal extends Component {
     this.state = {
       proposals: [],
       responseId: null,
-      openModalProposalMessage: false
+      openModalProposalMessage: false,
+      xs: 6
     };
   }
 
   componentDidMount() {
+    this.listenResizeEvent()
     this.fetchProposal();
   }
 
@@ -28,6 +31,12 @@ class UserProposal extends Component {
       })
     });
   };
+
+  listenResizeEvent = () => {
+    if(window.innerWidth < 1024) {
+      return this.setState({xs: 10})
+    }
+  }
 
   render() {
     return (
@@ -47,9 +56,10 @@ class UserProposal extends Component {
               return (
                 <div key={proposal.id}>
                   <Row style={{ justifyContent: "center" }}>
-                    <Col xs={6}>
+                    <Col xs={this.state.xs}>
                       <Card className={"requests"}>
                         <Card.Img
+                          className="request_image"
                           variant="top"
                           src={`https://source.unsplash.com/user/ravi_roshan_inc/_AdUs32i0jc`}
                           style={{ width: "35%", height: "100%" }}

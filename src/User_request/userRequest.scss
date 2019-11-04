@@ -1,4 +1,9 @@
 
+.card_request{
+    display: flex;
+    flex-direction: column;
+}
+
 .user-requests {
     display: flex;
     justify-content: center;
@@ -12,4 +17,22 @@
 
 .text_message{
     resize: none;
+}
+
+@media all and (max-width: 850px) {
+
+    .request_image {
+        display: none;
+    }
+
+    .requests {
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        height: 350px;
+    }
+
+    .row_request{
+        margin: 0 !important;
+    }
 }

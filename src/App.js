@@ -12,24 +12,24 @@ import UserPropsal from "./User_proposal/UserProposal";
 function App() {
   return (
     <Router>
-      <Header />
       <div>
+        <Header />
         <Route
           exact
           path="/"
-          render={() => (
+          render={() =>
             localStorage.authentication_token ? (
               <Redirect to="/location" />
             ) : (
               <Home />
             )
-          )}
+          }
         />
         <PrivateRoute exact path="/location" component={Location} />
         <PrivateRoute exact path="/request" component={UserRequest} />
         <PrivateRoute exact path="/proposal" component={UserPropsal} />
+        <Footer />
       </div>
-      <Footer />
     </Router>
   );
 }

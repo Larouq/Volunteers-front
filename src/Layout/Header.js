@@ -94,9 +94,9 @@ class Header extends Component {
             >
               <h1 className="name">Volunteers</h1>
             </Link>
-            <div className="navbar">
+            <div>
               {!localStorage.authentication_token ? (
-                <div>
+                <div className="navbar">
                   <Form className="form_header">
                     <Row>
                       <Col xs={5}>
@@ -180,7 +180,7 @@ class Header extends Component {
                   </div>
                   <div
                     className="navlink"
-                    style={{ marginLeft: "70px" }}
+                    style={{ marginLeft: "70px", marginRight: "70px" }}
                     onClick={async () => {
                       await localStorage.clear();
                       this.setState({ email: "", password: "" });
@@ -200,11 +200,20 @@ class Header extends Component {
                   <div
                     className="menu-item"
                     onClick={() => {
+                      this.props.history.push("/proposal");
+                      this.closeMenu();
+                    }}
+                  >
+                    My proposals
+                  </div>
+                  <div
+                    className="menu-item"
+                    onClick={() => {
                       this.props.history.push("/request");
                       this.closeMenu();
                     }}
                   >
-                    my requests
+                    My requests
                   </div>
                   <div
                     className="menu-item"
@@ -214,11 +223,11 @@ class Header extends Component {
                     }}
                     style={{ cursor: "pointer" }}
                   >
-                    create request
+                    Create request
                   </div>
                   <div
                     className="menu-item"
-                    style={{ marginLeft: "20px", cursor: "pointer" }}
+                    style={{ cursor: "pointer" }}
                     onClick={async () => {
                       this.closeMenu();
                       await localStorage.clear();
@@ -226,7 +235,7 @@ class Header extends Component {
                       this.props.history.push("/");
                     }}
                   >
-                    log out
+                    Log out
                   </div>
                 </Menu>
               )}

@@ -50,6 +50,7 @@ class ModalProposalMessage extends Component {
         onHide={this.props.onHide}
         size="lg"
         centered
+        className="modal"
       >
         <Modal.Header closeButton>
           <Modal.Title>Your messages</Modal.Title>

@@ -16,11 +16,13 @@ class UserRequest extends Component {
     this.state = {
       requests: [],
       requestId: null,
-      openModalUserMessage: false
+      openModalUserMessage: false,
+      xs: 6
     };
   }
 
   async componentDidMount() {
+    this.listenResizeEvent()
     const { authentication_token, client, email } = localStorage;
     const requests = await fetchUserRequests(
       authentication_token,
@@ -46,10 +48,16 @@ class UserRequest extends Component {
     if (timeDiff > 86400000) return true;
   };
 
+  listenResizeEvent = () => {
+    if(window.innerWidth < 1024) {
+      return this.setState({xs: 10})
+    }
+  }
+
   render() {
     return (
       <Fragment>
-        <Row style={{ justifyContent: "center" }}>
+        <Row style={{ justifyContent: "center"}}>
           <Col xs={6}>
             {!this.state.requests.length && (
               <Card>
@@ -58,17 +66,18 @@ class UserRequest extends Component {
             )}
           </Col>
         </Row>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className="card_request">
           {this.state.requests &&
             this.state.requests
               .filter(request => request.statement === "working")
               .map(request => {
                 return (
                   <div key={(Math.floor(Math.random() * 10000) + 1).toString()}>
-                    <Row style={{ justifyContent: "center" }}>
-                      <Col xs={6}>
+                    <Row className="row_request" style={{ justifyContent: "center" }}>
+                      <Col xs={this.state.xs}>
                         <Card className={"requests"}>
                           <Card.Img
+                            className="request_image"
                             variant="top"
                             src={`https://source.unsplash.com/user/ravi_roshan_inc/_AdUs32i0jc`}
                             style={{ width: "35%", height: "100%" }}
