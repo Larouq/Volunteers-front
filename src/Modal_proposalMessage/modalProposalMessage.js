@@ -19,7 +19,15 @@ class ModalProposalMessage extends Component {
   };
 
   handleSubmitMessage = responseId => {
-    createMessage(responseId, localStorage.user_id, this.state.text);
+    const { authentication_token, client, email } = localStorage;
+    createMessage(
+      responseId,
+      localStorage.user_id,
+      this.state.text,
+      authentication_token,
+      client,
+      email
+    );
     this.setState({ text: "" });
   };
 

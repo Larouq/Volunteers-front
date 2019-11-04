@@ -33,23 +33,36 @@ class ModalUserMessage extends Component {
       this.props.requestId
     );
 
-    this.setState({ responses, userId: responses[0].user_id });
+    this.setState({
+      responses,
+      userId: responses[0].user_id,
+      responseId: responses[0].id
+    });
 
     try {
       setInterval(async () => {
-        const responses = await fetchUserResponse(
-          authentication_token,
-          client,
-          email,
-          localStorage.user_id,
-          this.props.requestId
-        );
-        this.setState({ responses });
-      }, 1500);
+        this.refetchResponses()
+      }, 2000);
     } catch (error) {
       return alert(new Error(`${error.response}`));
     }
   }
+
+  refetchResponses = async () => {
+    const { authentication_token, client, email } = localStorage;
+
+    const responses = await fetchUserResponse(
+      authentication_token,
+      client,
+      email,
+      localStorage.user_id,
+      this.props.requestId
+    );
+
+    this.setState({
+      responses
+    });
+  };
 
   componentDidUpdate() {
     this.scrollToBottom();
@@ -60,7 +73,15 @@ class ModalUserMessage extends Component {
   };
 
   handleSubmitMessage = responseId => {
-    createMessage(responseId, localStorage.user_id, this.state.text);
+    const { authentication_token, client, email } = localStorage;
+    createMessage(
+      responseId,
+      localStorage.user_id,
+      this.state.text,
+      authentication_token,
+      client,
+      email
+    );
     this.setState({ text: "" });
   };
 
@@ -138,6 +159,7 @@ class ModalUserMessage extends Component {
             variant="success"
             onClick={() => {
               this.handleSubmitMessage(this.state.responseId);
+              this.refetchResponses()
             }}
             disabled={!this.state.text || !this.state.responses.length}
           >

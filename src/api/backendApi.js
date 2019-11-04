@@ -179,7 +179,7 @@ export async function createResponse(
 }
 
 export async function createMessage(
-  requestID,
+  responseId,
   userId,
   content,
   access_token,
@@ -192,7 +192,7 @@ export async function createMessage(
       content
     };
     return axios.post(
-      `${BACKEND_API_URL}/responses/${requestID}/messages`,
+      `${BACKEND_API_URL}/responses/${responseId}/messages`,
       params,
       {
         headers: {
